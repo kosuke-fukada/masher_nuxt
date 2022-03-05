@@ -15,5 +15,16 @@ module.exports = {
   plugins: [
   ],
   // add your custom rules here
-  rules: {}
+  rules: {
+    'vue/max-attributes-per-line': ['error', {
+      singleline: {
+        max: 1
+      },
+      multiline: {
+        max: 1
+      }
+    }],
+    'vue/multi-word-component-names': 'off',
+    'space-before-function-paren': 0
+  }
 }
