@@ -1,3 +1,5 @@
+import * as FontAwesome from './build/fontawesome'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -29,7 +31,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -52,6 +55,14 @@ export default {
   watchers: {
     webpack: {
       ignored: /(node_modules)|(.git)/
+    }
+  },
+
+  fontawesome: {
+    icons: {
+      solid: FontAwesome.solid,
+      regular: FontAwesome.regular,
+      brands: FontAwesome.brands
     }
   }
 }
