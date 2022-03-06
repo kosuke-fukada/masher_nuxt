@@ -2,6 +2,8 @@ const solid = [
   'faHeart'
 ]
 const regular = []
-const brands = []
+const brands = [
+  'faTwitter'
+]
 
 export { solid, regular, brands }
