@@ -1,6 +1,6 @@
 <template>
   <Button @click="favCountUp">
-    <span class="flex items-center select-none">
+    <span class="flex items-center">
       <font-awesome-icon
         icon="heart"
         class="mr-2 text-red-600"
