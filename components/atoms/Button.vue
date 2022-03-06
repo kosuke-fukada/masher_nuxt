@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-12 cursor-pointer"
+    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-12 cursor-pointer active:scale-95 select-none"
     :class="[buttonColor, borderColor]"
     @click="onClick"
   >

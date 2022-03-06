@@ -10,5 +10,8 @@ module.exports = {
     extend: {}
   },
   plugins: [],
-  mode: 'jit'
+  mode: 'jit',
+  variants: {
+    scale: ['responsive', 'hover', 'focus', 'active']
+  }
 }
