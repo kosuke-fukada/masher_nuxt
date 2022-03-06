@@ -7,11 +7,12 @@
       type="text"
       :placeholder="placeholder"
       @blur="onBlur"
+      @input="onInput"
     >
     <p
       class="text-xs text-red-600 my-1 h-4"
     >
-      {{ error }}
+      {{ errorMessage }}
     </p>
   </div>
 </template>
@@ -32,19 +33,22 @@ export default {
       type: String,
       default: 'w-72'
     },
-    error: {
+    errorMessage: {
       type: String,
       default: ''
     }
   },
   computed: {
     borderColor() {
-      return this.error ? 'border-red-600' : 'border-gray-300'
+      return this.errorMessage ? 'border-red-600' : 'border-gray-300'
     }
   },
   methods: {
     onBlur() {
       this.$emit('blur', this.value)
+    },
+    onInput(e) {
+      this.$emit('input', e.target.value)
     }
   }
 }
