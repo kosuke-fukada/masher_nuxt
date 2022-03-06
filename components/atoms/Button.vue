@@ -1,7 +1,8 @@
 <template>
   <div
-    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-12"
+    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-12 cursor-pointer"
     :class="[buttonColor, borderColor]"
+    @click="onClick"
   >
     <span :class="textColor">
       <slot />
@@ -24,6 +25,11 @@ export default {
     },
     textColor() {
       return this.buttonColor === 'bg-white' ? 'text-gray-600' : 'text-white'
+    }
+  },
+  methods: {
+    onClick() {
+      this.$emit('click')
     }
   }
 }
