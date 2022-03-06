@@ -1,4 +1,6 @@
-const solid = []
+const solid = [
+  'faHeart'
+]
 const regular = []
 const brands = []
 
