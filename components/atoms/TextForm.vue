@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4 my-12 pb-6">
+  <div class="mx-4 my-4 w-3/4">
     <input
       class="border-2 rounded-md"
       :class="[width, borderColor]"

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center my-12">
+  <div class="flex justify-center my-4 w-full">
     <div class="grid w-3/4 grid-cols-1 md:grid-cols-3 lg:grid-cols-3 bg-slate-200 rounded-xl overflow-hidden">
       <div
         v-for="(item, index) in list"
