@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-12 cursor-pointer active:scale-95 select-none"
+    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-4 cursor-pointer active:scale-95 select-none"
     :class="[buttonColor, borderColor]"
     @click="onClick"
   >
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     borderColor() {
-      return this.buttonColor === 'bg-white' ? 'border-2 border-gray-300' : ''
+      return this.buttonColor === 'bg-white' ? 'border border-gray-300' : ''
     },
     textColor() {
       return this.buttonColor === 'bg-white' ? 'text-gray-600' : 'text-white'
