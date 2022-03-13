@@ -5,7 +5,16 @@ module.exports = {
   theme: {
     colors: {
       ...colors,
-      twitter: '#1DA1F2'
+      twitter: '#1DA1F2',
+      dark: {
+        background: '#0F172A',
+        text: '#FFFFFF'
+      },
+      light: {
+        background: '#FFFFFF',
+        text: '#424242'
+      },
+      base: '#0F172A'
     },
     screens: {
       sm: {
