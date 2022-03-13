@@ -1,4 +1,6 @@
 const solid = [
+  'faChevronDown',
+  'faChevronUp',
   'faHeart'
 ]
 const regular = []
