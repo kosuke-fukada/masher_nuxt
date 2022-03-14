@@ -110,5 +110,9 @@ export default {
     },
     host: 'local.masher.app',
     port: 3000
+  },
+
+  router: {
+    middleware: 'accessLimit'
   }
 }
