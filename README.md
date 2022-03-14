@@ -3,7 +3,7 @@
 ## ローカル環境構築について
 
 本番環境以外ではIPによるアクセス制限を行っています。  
-[IPinfo.io]('https://ipinfo.io)からIPを取得する関係上、ローカル環境のSSL化を行っています。  
+[IPinfo.io](https://ipinfo.io)からIPを取得する関係上、ローカル環境のSSL化を行っています。  
 その為、ローカル環境構築時に以下の対応をお願いいたします。
 
 ### hostsに追加
@@ -49,3 +49,7 @@ openssl x509 -days 3650 -req -signkey server.key < server.csr > server.crt -extf
 - https://portaltan.hatenablog.com/entry/2017/10/12/134120
 - https://portaltan.hatenablog.com/entry/2017/10/16/174619
 - https://qiita.com/kawasukeeee/items/81a71cb55db87cdbba4d
+
+### IP制限を修正
+
+[こちら](https://www.cman.jp/network/support/go_access.cgi)等で自身のIPを調べ、`.env`の`LOCAL_IP`の値を修正してください。
