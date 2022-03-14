@@ -1,3 +1,5 @@
+import path from 'path'
+import fs from 'fs'
 import * as FontAwesome from './build/fontawesome'
 
 export default {
@@ -99,5 +101,14 @@ export default {
       firestore: true,
       analytics: true
     }
+  },
+
+  server: {
+    https: {
+      key: fs.readFileSync(path.resolve('server.key')),
+      cert: fs.readFileSync(path.resolve('server.crt'))
+    },
+    host: 'local.masher.app',
+    port: 3000
   }
 }

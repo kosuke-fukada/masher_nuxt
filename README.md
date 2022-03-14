@@ -1,69 +1,51 @@
-# twitter-infinite-fav
+# Masher
 
-## Build Setup
+## ローカル環境構築について
 
-```bash
-# install dependencies
-$ yarn install
+本番環境以外ではIPによるアクセス制限を行っています。  
+[IPinfo.io]('https://ipinfo.io)からIPを取得する関係上、ローカル環境のSSL化を行っています。  
+その為、ローカル環境構築時に以下の対応をお願いいたします。
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+### hostsに追加
 
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+```
+sudo vi /private/etc/hosts
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+以下を追記
 
-## Special Directories
+```
+127.0.0.1 local.masher.app
+```
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+### OpenSSLで自己証明書作成
 
-### `assets`
+- 秘密鍵を作成
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+```
+openssl genrsa -aes128 2048 > server.key
+```
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+- 証明書署名要求(CSR)を作成
 
-### `components`
+```
+openssl req -new -key server.key -out server.csr
+```
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+- パスフレーズ解除
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+```
+cp server.key server.key.org
+openssl rsa -in server.key.org -out server.key
+```
 
-### `layouts`
+- 自己証明書(CRT)を作成
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+```
+openssl x509 -days 3650 -req -signkey server.key < server.csr > server.crt -extfile san.ext
+```
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+※参考  
+- https://portaltan.hatenablog.com/entry/2017/10/12/134120
+- https://portaltan.hatenablog.com/entry/2017/10/16/174619
+- https://qiita.com/kawasukeeee/items/81a71cb55db87cdbba4d
