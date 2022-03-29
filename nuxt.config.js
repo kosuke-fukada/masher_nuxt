@@ -25,8 +25,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/darkMode.js',
-    '~/plugins/crypto.js'
+    '~/plugins/darkMode',
+    '~/plugins/crypto',
+    '~/plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -73,7 +74,10 @@ export default {
   },
 
   env: {
-    FIRE_ENV: process.env.FIRE_ENV
+    FIRE_ENV: process.env.FIRE_ENV,
+    KEY_BASE_STRING: process.env.KEY_BASE_STRING,
+    KEY_SALT: process.env.KEY_SALT,
+    AXIOS_REQUEST_VERIFICATION: process.env.AXIOS_REQUEST_VERIFICATION
   },
 
   firebase: {
@@ -114,6 +118,12 @@ export default {
   },
 
   router: {
-    middleware: 'accessLimit'
-  }
+    middleware: [
+      'accessLimit'
+    ]
+  },
+
+  serverMiddleware: [
+    '~/api/'
+  ]
 }
