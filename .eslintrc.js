@@ -26,6 +26,7 @@ module.exports = {
     }],
     'vue/multi-word-component-names': 'off',
     'space-before-function-paren': 0,
-    'no-console': 0
+    'no-console': 0,
+    'arrow-parens': 0
   }
 }
