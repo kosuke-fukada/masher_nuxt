@@ -5,7 +5,7 @@ import * as FontAwesome from './build/fontawesome'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'twitter-infinite-fav',
+    title: 'Masher | Twitter無限いいねボタン',
     htmlAttrs: {
       lang: 'en'
     },
@@ -26,7 +26,6 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/darkMode',
-    '~/plugins/crypto',
     '~/plugins/axios'
   ],
 
@@ -51,7 +50,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+    baseURL: 'https://local.masher.app:3000',
+    credentials: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -75,9 +75,8 @@ export default {
 
   env: {
     FIRE_ENV: process.env.FIRE_ENV,
-    KEY_BASE_STRING: process.env.KEY_BASE_STRING,
-    KEY_SALT: process.env.KEY_SALT,
-    AXIOS_REQUEST_VERIFICATION: process.env.AXIOS_REQUEST_VERIFICATION
+    BACKEND_API_HOST: process.env.BACKEND_API_HOST,
+    SESSION_SECRET: process.env.SESSION_SECRET
   },
 
   firebase: {
