@@ -1,7 +1,7 @@
 <template>
   <Button
     button-color="bg-twitter"
-    @click="twitterLogin"
+    @click="signinWithTwitter"
   >
     <span>
       <font-awesome-icon
@@ -15,13 +15,16 @@
 
 <script>
 import Button from '@/components/atoms/Button'
+
 export default {
   name: 'TwitterLoginButton',
   components: {
     Button
   },
   methods: {
-    twitterLogin() {}
+    signinWithTwitter() {
+      this.$router.push('/signin')
+    }
   }
 }
 </script>
