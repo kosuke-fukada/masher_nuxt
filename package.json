@@ -25,6 +25,7 @@
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "firebase": "^9.6.8",
+    "log4js": "^6.4.6",
     "nuxt": "^2.15.8",
     "query-string": "^7.1.1",
     "vue": "^2.6.14",
