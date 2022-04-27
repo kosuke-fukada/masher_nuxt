@@ -3,6 +3,22 @@ const session = require('express-session')
 const express = require('express')
 const axios = require('axios').default
 const app = express()
+const log4js = require('log4js')
+log4js.configure({
+  appenders: {
+    nuxt_server: {
+      type: 'file',
+      filename: './api/log/nuxt_server.log'
+    }
+  },
+  categories: {
+    default: {
+      appenders: ['nuxt_server'],
+      level: 'error'
+    }
+  }
+})
+const logger = log4js.getLogger('nuxt_server')
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -28,16 +44,21 @@ app.get('/signin/twitter/', async (req, res) => {
 
 app.get('/signin/twitter/callback/', async (req, res) => {
   const query = req.query
-  const response = await axios.get('/signin/twitter/callback',
-    {
-      params: query,
-      headers: {
-        Cookie: req.session.masher_session
+  try {
+    const response = await axios.get('/signin/twitter/callback',
+      {
+        params: query,
+        headers: {
+          Cookie: req.session.masher_session
+        }
       }
-    }
-  )
-  req.session.masher_session = response.headers['set-cookie']
-  res.status(204).send()
+    )
+    req.session.masher_session = response.headers['set-cookie']
+    res.status(204).send()
+  } catch (e) {
+    logger.error('An error occurred: ' + e.message)
+    res.send(500)
+  }
 })
 
 app.get('/signout/', async (req, res) => {
