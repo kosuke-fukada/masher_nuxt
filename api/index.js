@@ -42,8 +42,10 @@ app.get('/signin/twitter/', async (req, res) => {
     req.session.masher_session = response.headers['set-cookie']
     res.json(response.data)
   } catch (e) {
-    logger.error('Could not get authorize url: ' + e.message)
-    res.status(500).send()
+    logger.error('Could not get authorize url: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
   }
 })
 
@@ -61,9 +63,11 @@ app.get('/signin/twitter/callback/', async (req, res) => {
     req.session.masher_session = response.headers['set-cookie']
     res.status(204).send()
   } catch (e) {
-    logger.error('Could not signin: ' + e.message)
+    logger.error('Could not signin: ' + e.response.data.message)
     req.session.destroy()
-    res.status(500).send()
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
   }
 })
 
@@ -73,8 +77,10 @@ app.get('/signout/', async (req, res) => {
     req.session.destroy()
     res.status(204).send()
   } catch (e) {
-    logger.error('Could not signout: ' + e.message)
-    res.status(500).send()
+    logger.error('Could not signout: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
   }
 })
 
@@ -94,8 +100,10 @@ app.get('/user/', async (req, res) => {
     )
     res.send(userInfo.data)
   } catch (e) {
-    logger.error('Could not get user info: ' + e.message)
-    res.status(500).send()
+    logger.error('Could not get user info: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
   }
 })
 
