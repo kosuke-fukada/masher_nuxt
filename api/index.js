@@ -37,9 +37,14 @@ axios.defaults.httpsAgent = new https.Agent({ rejectUnauthorized: false })
 axios.defaults.baseURL = process.env.BACKEND_API_HOST
 
 app.get('/signin/twitter/', async (req, res) => {
-  const response = await axios.get('/signin/twitter')
-  req.session.masher_session = response.headers['set-cookie']
-  res.json(response.data)
+  try {
+    const response = await axios.get('/signin/twitter')
+    req.session.masher_session = response.headers['set-cookie']
+    res.json(response.data)
+  } catch (e) {
+    logger.error('Could not get authorize url: ' + e.message)
+    res.status(500).send()
+  }
 })
 
 app.get('/signin/twitter/callback/', async (req, res) => {
@@ -56,15 +61,21 @@ app.get('/signin/twitter/callback/', async (req, res) => {
     req.session.masher_session = response.headers['set-cookie']
     res.status(204).send()
   } catch (e) {
-    logger.error('An error occurred: ' + e.message)
-    res.send(500)
+    logger.error('Could not signin: ' + e.message)
+    req.session.destroy()
+    res.status(500).send()
   }
 })
 
 app.get('/signout/', async (req, res) => {
-  await axios.get('/signout')
-  req.session.destroy()
-  res.status(204).send()
+  try {
+    await axios.get('/signout')
+    req.session.destroy()
+    res.status(204).send()
+  } catch (e) {
+    logger.error('Could not signout: ' + e.message)
+    res.status(500).send()
+  }
 })
 
 app.get('/user/', async (req, res) => {
@@ -72,14 +83,20 @@ app.get('/user/', async (req, res) => {
     res.send()
     return
   }
-  const userInfo = await axios.get('/user',
-    {
-      headers: {
-        Cookie: req.session.masher_session
+
+  try {
+    const userInfo = await axios.get('/user',
+      {
+        headers: {
+          Cookie: req.session.masher_session
+        }
       }
-    }
-  )
-  res.send(userInfo.data)
+    )
+    res.send(userInfo.data)
+  } catch (e) {
+    logger.error('Could not get user info: ' + e.message)
+    res.status(500).send()
+  }
 })
 
 module.exports = {
