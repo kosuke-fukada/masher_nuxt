@@ -1,5 +1,6 @@
 import https from 'https'
 const session = require('express-session')
+const MySQLStore = require('express-mysql-session')(session)
 const express = require('express')
 const axios = require('axios').default
 const app = express()
@@ -20,6 +21,17 @@ log4js.configure({
 })
 const logger = log4js.getLogger('nuxt_server')
 
+const sessionStore = new MySQLStore({
+  host: process.env.MYSQL_DB_HOST,
+  port: 3306,
+  user: process.env.MYSQL_DB_USER_NAME,
+  password: process.env.MYSQL_DB_PASSWORD,
+  database: process.env.MYSQL_DB_NAME,
+  schema: {
+    tableName: 'nuxt_sessions'
+  }
+})
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -29,7 +41,8 @@ app.use(session({
     secure: true,
     maxAge: 1000 * 60 * 60 * 24 * 365,
     domain: 'masher.app'
-  }
+  },
+  store: sessionStore
 }))
 
 axios.defaults.withCredentials = true
