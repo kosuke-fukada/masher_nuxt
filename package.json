@@ -24,7 +24,6 @@
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "express": "^4.17.3",
-    "express-mysql-session": "^2.1.8",
     "express-session": "^1.17.2",
     "firebase": "^9.6.8",
     "log4js": "^6.4.6",
