@@ -1,9 +1,9 @@
 {
-  "name": "twitter-infinite-fav",
+  "name": "masher_nuxt",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "FIRE_ENV=development nuxt",
+    "dev": "FIRE_ENV=development HOST=0.0.0.0 PORT=3000 nuxt",
     "build": "FIRE_ENV=production nuxt build",
     "start": "FIRE_ENV=production nuxt start",
     "generate": "nuxt generate",
