@@ -76,11 +76,7 @@ export default {
   env: {
     FIRE_ENV: process.env.FIRE_ENV,
     BACKEND_API_HOST: process.env.BACKEND_API_HOST,
-    SESSION_SECRET: process.env.SESSION_SECRET,
-    MYSQL_DB_HOST: process.env.MYSQL_DB_HOST,
-    MYSQL_DB_NAME: process.env.MYSQL_DB_NAME,
-    MYSQL_DB_USER_NAME: process.env.MYSQL_DB_USER_NAME,
-    MYSQL_DB_PASSWORD: process.env.MYSQL_DB_PASSWORD
+    SESSION_SECRET: process.env.SESSION_SECRET
   },
 
   firebase: {

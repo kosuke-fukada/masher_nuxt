@@ -1,9 +1,8 @@
 import https from 'https'
-const session = require('express-session')
-const MySQLStore = require('express-mysql-session')(session)
 const express = require('express')
-const axios = require('axios').default
 const app = express()
+
+// Logger config
 const log4js = require('log4js')
 log4js.configure({
   appenders: {
@@ -21,17 +20,14 @@ log4js.configure({
 })
 const logger = log4js.getLogger('nuxt_server')
 
-const sessionStore = new MySQLStore({
-  host: process.env.MYSQL_DB_HOST,
-  port: 3306,
-  user: process.env.MYSQL_DB_USER_NAME,
-  password: process.env.MYSQL_DB_PASSWORD,
-  database: process.env.MYSQL_DB_NAME,
-  schema: {
-    tableName: 'nuxt_sessions'
-  }
+// Session config
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
+const { createClient } = require('redis')
+const redisClient = createClient({ legacyMode: true })
+redisClient.connect().catch(e => {
+  logger.error(e)
 })
-
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -42,9 +38,11 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 365,
     domain: 'masher.app'
   },
-  store: sessionStore
+  store: new RedisStore({ client: redisClient })
 }))
 
+// Axios config
+const axios = require('axios').default
 axios.defaults.withCredentials = true
 axios.defaults.httpsAgent = new https.Agent({ rejectUnauthorized: false })
 axios.defaults.baseURL = process.env.BACKEND_API_HOST
