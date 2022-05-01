@@ -121,9 +121,7 @@ export default {
   },
 
   router: {
-    middleware: [
-      'accessLimit'
-    ]
+    middleware: []
   },
 
   serverMiddleware: [
