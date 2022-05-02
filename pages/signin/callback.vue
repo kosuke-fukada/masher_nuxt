@@ -5,6 +5,7 @@
 <script>
 export default {
   name: 'Callback',
+  middleware: 'isAuthenticated',
   async asyncData({ redirect, route, store, $axios }) {
     const query = route.query
     const params = {

@@ -122,5 +122,11 @@ export default {
 
   serverMiddleware: [
     '~/api/'
-  ]
+  ],
+
+  loadingIndicator: {
+    name: 'three-bounce',
+    color: '#00BFFF',
+    background: '#FFFFFF'
+  }
 }

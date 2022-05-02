@@ -1,19 +1,11 @@
 <template>
-  <div>
-    <vue-loading
-      type="spiningDubbles"
-    />
-  </div>
+  <div />
 </template>
 
 <script>
-import { VueLoading } from 'vue-loading-template'
-
 export default {
   name: 'Index',
-  components: {
-    VueLoading
-  },
+  middleware: 'isAuthenticated',
   async asyncData({ redirect, $axios }) {
     const url = await $axios.$get('/api/signin/twitter/')
     redirect(302, url)
