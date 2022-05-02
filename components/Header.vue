@@ -12,8 +12,11 @@
         class="mr-8 flex items-center cursor-pointer"
         @click="toggleHeaderMenu"
       >
-        <Icon />
-        <span class="text-white text-xs">@hogehoge</span>
+        <Icon
+          v-if="isAuthenticated"
+          :img="avatar"
+        />
+        <span class="text-white text-xs">{{ userName }}</span>
         <font-awesome-icon
           :icon="headerChevronIcon"
           class="text-white text-xs m-1"
@@ -64,11 +67,21 @@ export default {
   computed: {
     headerChevronIcon() {
       return this.headerMenuDisplay ? 'chevron-up' : 'chevron-down'
+    },
+    isAuthenticated() {
+      return this.$store.getters['user/isAuthenticated']
+    },
+    userName() {
+      return this.isAuthenticated ? '@' + this.$store.getters['user/userName'] : ''
+    },
+    avatar() {
+      return this.isAuthenticated ? this.$store.getters['user/avatar'] : ''
     }
   },
   methods: {
     toTop() {
-      this.$router.push('/')
+      const path = this.isAuthenticated ? '/main' : '/'
+      this.$router.push(path)
     },
     toggleHeaderMenu() {
       this.headerMenuDisplay = !this.headerMenuDisplay
