@@ -118,6 +118,46 @@ app.get('/user/', async (req, res) => {
   }
 })
 
+app.get('/likes/', async (req, res) => {
+  if (!req.session.masher_session) {
+    res.status(403).send({
+      message: 'Forbidden.'
+    })
+  }
+
+  try {
+    const list = await axios.get('/likes/twitter',
+      {
+        headers: {
+          Cookie: req.session.masher_session
+        }
+      }
+    )
+    res.send(list.data)
+  } catch (e) {
+    logger.error('Could not get likes tweet list: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
+  }
+})
+
+app.get('/refresh/twitter/', async (req, res) => {
+  try {
+    await axios.get('/user/refresh/twitter', {
+      headers: {
+        Cookie: req.session.masher_session
+      }
+    })
+    res.send()
+  } catch (e) {
+    logger.error('Could not get likes tweet list: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
+  }
+})
+
 module.exports = {
   path: '/api/',
   handler: app
