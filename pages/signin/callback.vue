@@ -11,8 +11,10 @@ export default {
     const params = {
       params: query
     }
-    const userInfo = await $axios.$get('/api/signin/twitter/callback/', params)
-    await store.dispatch('user/setUserInfo', userInfo)
+    const response = await $axios.$get('/api/signin/twitter/callback/', params)
+    if (Object.prototype.hasOwnProperty.call(response, 'message')) {
+      redirect('/')
+    }
     redirect('/main')
   }
 }
