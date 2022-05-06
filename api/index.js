@@ -62,6 +62,14 @@ app.get('/signin/twitter/', async (req, res) => {
 
 app.get('/signin/twitter/callback/', async (req, res) => {
   const query = req.query
+  if (Object.prototype.hasOwnProperty.call(query, 'error')) {
+    req.session.destroy()
+    logger.error('Authorize canceled.')
+    res.send({
+      message: 'Authorize canceled.'
+    })
+    return
+  }
   try {
     const response = await axios.get('/signin/twitter/callback',
       {
@@ -76,7 +84,7 @@ app.get('/signin/twitter/callback/', async (req, res) => {
   } catch (e) {
     logger.error('Could not signin: ' + e.response.data.message)
     req.session.destroy()
-    res.status(e.response.status).send({
+    res.send({
       message: e.response.data.message
     })
   }
