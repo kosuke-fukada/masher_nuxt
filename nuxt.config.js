@@ -17,13 +17,19 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        type: 'text/javascript',
+        async: true,
+        defer: true,
+        src: 'https://platform.twitter.com/widgets.js'
+      }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '~/assets/scss/app.scss'
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -46,8 +52,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/firebase',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/firebase'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -131,9 +136,5 @@ export default {
     name: 'three-bounce',
     color: '#00BFFF',
     background: '#FFFFFF'
-  },
-
-  styleResources: {
-    scss: ['./assets/**/*.scss']
   }
 }
