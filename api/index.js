@@ -166,6 +166,27 @@ app.get('/refresh/twitter/', async (req, res) => {
   }
 })
 
+app.get('/tweet', async (req, res) => {
+  try {
+    const tweet = await axios.get('/tweet', {
+      headers: {
+        Cookie: req.session.masher_session
+      },
+      params: {
+        tweet_id: req.query.tweet_id,
+        account_id: req.query.account_id,
+        user_name: req.query.user_name
+      }
+    })
+    res.send(tweet.data)
+  } catch (e) {
+    logger.error('Could not get tweet: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
+  }
+})
+
 module.exports = {
   path: '/api/',
   handler: app

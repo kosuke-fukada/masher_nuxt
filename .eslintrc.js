@@ -27,6 +27,8 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'space-before-function-paren': 0,
     'no-console': 0,
-    'arrow-parens': 0
+    'arrow-parens': 0,
+    'vue/no-v-html': 'off',
+    'vue/no-template-shadow': 0
   }
 }

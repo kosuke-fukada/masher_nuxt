@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mx-4 my-4 p-4 rounded-xl border cursor-pointer transition-all ease-in-out hover:-translate-y-1 hover:shadow-lg"
+    class="mx-4 my-4 p-4 rounded-xl border cursor-pointer min-w-xl max-w-xl transition-all ease-in-out hover:-translate-y-1 hover:shadow-lg"
     :class="cardStyle"
   >
     <slot />
