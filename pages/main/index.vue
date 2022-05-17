@@ -18,21 +18,36 @@
         :user-name="tweet.user_name"
       />
     </template>
+    <LoadingButton
+      v-if="nextToken"
+      :loading="loading"
+      @click="handleLoading"
+    >
+      もっと見る
+    </LoadingButton>
   </div>
 </template>
 
 <script>
 import Button from '~/components/atoms/Button'
 import Tweetcard from '~/components/molecules/card/Tweetcard'
+import LoadingButton from '~/components/molecules/button/LoadingButton'
 export default {
   name: 'Main',
   components: {
     Button,
-    Tweetcard
+    Tweetcard,
+    LoadingButton
   },
   async asyncData({ $axios, store }) {
-    const list = await $axios.$get('/api/likes/')
-    store.commit('likeTweetList/setTweetList', list)
+    const response = await $axios.$get('/api/likes/')
+    store.commit('likeTweetList/setTweetList', response.tweetList)
+    store.commit('likeTweetList/setNextToken', response.nextToken)
+  },
+  data() {
+    return {
+      loading: false
+    }
   },
   computed: {
     tweetList: {
@@ -42,10 +57,15 @@ export default {
       set(tweetList) {
         this.$store.commit('likeTweetList/setTweetList', tweetList)
       }
+    },
+    nextToken: {
+      get() {
+        return this.$store.getters['likeTweetList/nextToken']
+      },
+      set(nextToken) {
+        this.$store.commit('likeTweetList/setNextToken', nextToken)
+      }
     }
-  },
-  mounted() {
-    window.twttr.widgets.load()
   },
   methods: {
     async signout() {
@@ -55,6 +75,18 @@ export default {
     },
     async refresh() {
       await this.$axios.$get('/api/refresh/twitter/')
+    },
+    async handleLoading() {
+      this.loading = true
+      const response = await this.$axios.$get('/api/likes/', {
+        params: {
+          next_token: this.nextToken
+        }
+      })
+      const updatedTweetList = this.tweetList.concat(response.tweetList)
+      this.tweetList = updatedTweetList
+      this.nextToken = response.nextToken
+      this.loading = false
     }
   }
 }
