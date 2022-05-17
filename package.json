@@ -31,8 +31,8 @@
     "query-string": "^7.1.1",
     "redis": "^4.0.6",
     "vue": "^2.6.14",
-    "vue-loading-template": "^1.3.2",
     "vue-server-renderer": "^2.6.14",
+    "vue-spinkit": "^2.0.0",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^4.46.0"
   },

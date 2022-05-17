@@ -134,10 +134,14 @@ app.get('/likes/', async (req, res) => {
   }
 
   try {
+    const nextToken = req.query.next_token ?? ''
     const list = await axios.get('/likes/twitter',
       {
         headers: {
           Cookie: req.session.masher_session
+        },
+        params: {
+          next_token: nextToken
         }
       }
     )

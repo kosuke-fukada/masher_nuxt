@@ -13,11 +13,11 @@ const getters = {
 }
 
 const mutations = {
-  setTweetList(state, payload) {
-    state.tweetList = payload
+  setTweetList(state, tweetList) {
+    state.tweetList = tweetList
   },
-  setNextToken(state, payload) {
-    state.nextToken = payload.nextToken
+  setNextToken(state, nextToken) {
+    state.nextToken = nextToken
   }
 }
 
