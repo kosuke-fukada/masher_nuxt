@@ -10,14 +10,22 @@
     >
       refresh
     </Button>
-    <template v-for="tweet in tweetList">
+    <div
+      v-for="tweet in tweetList"
+      :key="tweet.tweet_id"
+    >
       <Tweetcard
-        :key="tweet.tweet_id"
         :tweet-id="tweet.tweet_id"
-        :account-id="tweet.account_id"
-        :user-name="tweet.user_name"
-      />
-    </template>
+        :author-id="tweet.author_id"
+        :author-name="tweet.author_name"
+      >
+        <Button
+          @click="toTweetDetailPage(tweet)"
+        >
+          このツイートを見る
+        </Button>
+      </Tweetcard>
+    </div>
     <LoadingButton
       v-if="nextToken"
       :loading="loading"
@@ -39,8 +47,12 @@ export default {
     Tweetcard,
     LoadingButton
   },
-  async asyncData({ $axios, store }) {
-    const response = await $axios.$get('/api/likes/')
+  async asyncData({ $axios, store, req }) {
+    const params = {}
+    if (process.server) {
+      params.headers = req.headers
+    }
+    const response = await $axios.$get('/api/likes/', params)
     store.commit('likeTweetList/setTweetList', response.tweetList)
     store.commit('likeTweetList/setNextToken', response.nextToken)
   },
@@ -87,6 +99,16 @@ export default {
       this.tweetList = updatedTweetList
       this.nextToken = response.nextToken
       this.loading = false
+    },
+    async toTweetDetailPage(tweet) {
+      await this.$store.dispatch('tweet/setTweet', tweet)
+      this.$router.push({
+        name: 'tweet-user-tweet_id',
+        params: {
+          user: tweet.author_name,
+          tweet_id: tweet.tweet_id
+        }
+      })
     }
   }
 }

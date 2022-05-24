@@ -6,16 +6,16 @@
 export default {
   name: 'Callback',
   middleware: 'isAuthenticated',
-  async asyncData({ redirect, route, store, $axios }) {
-    const query = route.query
+  async mounted() {
+    const query = this.$route.query
     const params = {
       params: query
     }
-    const response = await $axios.$get('/api/signin/twitter/callback/', params)
+    const response = await this.$axios.$get('/api/signin/twitter/callback/', params)
     if (Object.prototype.hasOwnProperty.call(response, 'message')) {
-      redirect('/')
+      this.$router.replace('/')
     }
-    redirect('/main')
+    this.$router.replace('/main')
   }
 }
 </script>
