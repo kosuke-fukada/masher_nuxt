@@ -1,5 +1,6 @@
 const state = () => ({
   user: {
+    userId: '',
     accountId: '',
     userName: '',
     displayName: '',
@@ -8,6 +9,9 @@ const state = () => ({
 })
 
 const getters = {
+  userId(state) {
+    return state.user.userId
+  },
   accountId(state) {
     return state.user.accountId
   },
@@ -38,6 +42,7 @@ const actions = {
   clearUser(context) {
     context.commit('setUser', {
       user: {
+        userId: '',
         accountId: '',
         userName: '',
         displayName: '',
@@ -47,6 +52,7 @@ const actions = {
   },
   async setUserInfo(context, userInfo) {
     const user = {
+      userId: userInfo.user_id,
       accountId: userInfo.account_id,
       userName: userInfo.user_name,
       displayName: userInfo.display_name,
