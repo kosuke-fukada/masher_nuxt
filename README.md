@@ -29,7 +29,7 @@ openssl genrsa -aes128 2048 > server.key
 - 証明書署名要求(CSR)を作成
 
 ```
-openssl req -new -key server.key -out server.csr
+openssl req -new -sha256 -key server.key -out server.csr
 ```
 
 - パスフレーズ解除
@@ -42,7 +42,7 @@ openssl rsa -in server.key.org -out server.key
 - 自己証明書(CRT)を作成
 
 ```
-openssl x509 -days 3650 -req -signkey server.key < server.csr > server.crt -extfile san.ext
+openssl x509 -days 3650 -req -signkey server.key < server.csr > server.crt -extfile san.ext -sha256
 ```
 
 ※参考  
