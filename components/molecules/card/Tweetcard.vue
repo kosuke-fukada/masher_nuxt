@@ -1,6 +1,7 @@
 <template>
   <Card>
     <div v-html="tweet.html" />
+    <slot />
   </Card>
 </template>
 
@@ -17,12 +18,12 @@ export default {
       require: true,
       default: ''
     },
-    accountId: {
+    authorId: {
       type: String,
       require: true,
       default: ''
     },
-    userName: {
+    authorName: {
       type: String,
       require: true,
       default: ''
@@ -36,8 +37,8 @@ export default {
   async mounted() {
     const params = {
       tweet_id: this.tweetId,
-      account_id: this.accountId,
-      user_name: this.userName
+      author_id: this.authorId,
+      author_name: this.authorName
     }
     this.tweet = await this.$axios.$get('/api/tweet/', {
       params
