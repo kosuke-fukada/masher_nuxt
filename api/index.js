@@ -86,6 +86,7 @@ app.get('/signin/twitter/callback/', async (req, res) => {
 app.get('/signout/', async (req, res) => {
   try {
     await axios.get('/signout')
+    res.clearCookie(req.cookies.masher_session)
     res.clearCookie('masher_session')
     res.clearCookie('XSRF-TOKEN')
     res.status(204).send()
