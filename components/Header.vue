@@ -32,10 +32,6 @@
         class="lg:w-1/4 lg:h-auto"
         @click.self="toggleHeaderMenu"
       >
-        <div class="bg-base border-b lg:border-l border-gray-600 p-1 flex justify-between items-center">
-          <span class="text-white ml-8">ダークモード</span>
-          <dark-mode-toggle class="mr-8" />
-        </div>
         <div class="bg-base border-b lg:border-l border-gray-600 p-1 flex justify-center items-center">
           <Button
             button-color="bg-red-500"
@@ -51,13 +47,11 @@
 <script>
 import Button from './atoms/Button.vue'
 import Icon from './atoms/Icon.vue'
-import DarkModeToggle from './organisms/DarkModeToggle'
 export default {
   name: 'Header',
   components: {
     Button,
-    Icon,
-    DarkModeToggle
+    Icon
   },
   data() {
     return {

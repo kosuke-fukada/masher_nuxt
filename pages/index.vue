@@ -34,8 +34,7 @@
       :list="list"
       :active="1"
     />
-    <DarkModeToggle />
-    <span class="text-white">{{ isDarkMode ? 'dark' : 'light' }}</span>
+    <span class="text-white">{{ 'light' }}</span>
   </div>
 </template>
 
@@ -46,7 +45,6 @@ import Heading from '@/components/atoms/Heading'
 import Icon from '@/components/atoms/Icon'
 import FavButton from '@/components/molecules/button/FavButton'
 import Step from '@/components/atoms/Step'
-import DarkModeToggle from '@/components/organisms/DarkModeToggle'
 import TwitterUrlForm from '@/components/molecules/form/TwitterUrlForm'
 import TwitterLoginButton from '~/components/molecules/button/TwitterLoginButton'
 
@@ -59,7 +57,6 @@ export default {
     Icon,
     FavButton,
     Step,
-    DarkModeToggle,
     TwitterUrlForm,
     TwitterLoginButton
   },
@@ -82,9 +79,6 @@ export default {
     }
   },
   computed: {
-    isDarkMode() {
-      return this.$isDarkMode.isDarkMode
-    },
     user() {
       return this.$store.getters['user/user']
     }

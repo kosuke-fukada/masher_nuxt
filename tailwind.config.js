@@ -12,10 +12,6 @@ module.exports = {
     colors: {
       ...colors,
       twitter: '#1DA1F2',
-      dark: {
-        background: '#0F172A',
-        text: '#FFFFFF'
-      },
       light: {
         background: '#FFFFFF',
         text: '#424242'
