@@ -1,7 +1,7 @@
 <template>
   <div class="select-none">
     <div
-      class="fixed top-0 left-0 w-full h-16 border-b border-gray-600 bg-base flex justify-between items-center"
+      class="fixed top-0 left-0 w-full h-16 bg-base flex justify-between items-center"
     >
       <img
         :src="require('~/assets/images/mash_logo_white.png')"

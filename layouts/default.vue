@@ -1,10 +1,7 @@
 <template>
   <div class="h-screen">
     <Header />
-    <div
-      class="py-16"
-      :class="backgroundColor"
-    >
+    <div class="py-16 bg-baselight">
       <Nuxt />
     </div>
     <Footer />
@@ -19,11 +16,6 @@ export default {
   components: {
     Header,
     Footer
-  },
-  computed: {
-    backgroundColor() {
-      return 'bg-light-background'
-    }
   }
 }
 </script>

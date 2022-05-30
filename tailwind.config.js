@@ -16,7 +16,9 @@ module.exports = {
         background: '#FFFFFF',
         text: '#424242'
       },
-      base: '#0F172A',
+      base: '#04B4AE',
+      baselight: '#02bab4',
+      button: '#7acfd6',
       backdrop: 'rgba(0, 0, 0, 0.7)'
     },
     screens: {
