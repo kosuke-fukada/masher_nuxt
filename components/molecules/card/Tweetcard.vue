@@ -50,6 +50,6 @@ export default {
 
 <style>
   .twitter-tweet > iframe {
-    width: 542px !important;
+    width: min(80vw, 542px) !important;
   }
 </style>
