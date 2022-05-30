@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     headingStyle() {
-      const color = 'text-gray-500'
+      const color = 'text-white'
       const size = this.size
       const bold = this.bold ? 'font-bold' : ''
       return [

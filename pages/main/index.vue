@@ -20,6 +20,7 @@
         :author-name="tweet.author_name"
       >
         <Button
+          button-color="bg-button"
           @click="toTweetDetailPage(tweet)"
         >
           このツイートを見る
