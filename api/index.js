@@ -67,16 +67,22 @@ app.get('/signin/twitter/callback/', async (req, res) => {
         }
       }
     )
-    res.clearCookie(req.cookies.masher_session)
-    res.clearCookie('masher_session')
-    res.clearCookie('XSRF-TOKEN')
+    Object.keys(req.cookies).forEach(key => {
+      res.clearCookie(key, {
+        domain: '.masher.app',
+        path: '/'
+      })
+    })
     res.setHeader('set-cookie', response.headers['set-cookie'])
     res.status(204).send()
   } catch (e) {
     logger.error('Could not signin: ' + e.response.data.message)
-    res.clearCookie(req.cookies.masher_session)
-    res.clearCookie('masher_session')
-    res.clearCookie('XSRF-TOKEN')
+    Object.keys(req.cookies).forEach(key => {
+      res.clearCookie(key, {
+        domain: '.masher.app',
+        path: '/'
+      })
+    })
     res.send({
       message: e.response.data.message
     })
@@ -86,9 +92,12 @@ app.get('/signin/twitter/callback/', async (req, res) => {
 app.get('/signout/', async (req, res) => {
   try {
     await axios.get('/signout')
-    res.clearCookie(req.cookies.masher_session)
-    res.clearCookie('masher_session')
-    res.clearCookie('XSRF-TOKEN')
+    Object.keys(req.cookies).forEach(key => {
+      res.clearCookie(key, {
+        domain: '.masher.app',
+        path: '/'
+      })
+    })
     res.status(204).send()
   } catch (e) {
     logger.error('Could not signout: ' + e.response.data.message)
