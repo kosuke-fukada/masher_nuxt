@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     backgroundColor() {
-      return this.$isDarkMode.isDarkMode ? 'bg-dark-background' : 'bg-light-background'
+      return 'bg-light-background'
     }
   }
 }

@@ -13,7 +13,7 @@ export default {
   props: {},
   computed: {
     cardStyle() {
-      return this.$isDarkMode.isDarkMode ? 'bg-dark-background text-white border-white shadow-white' : 'bg-white text-gray-600 border-gray-300 shadow-current'
+      return 'bg-white text-gray-600 border-gray-300 shadow-current'
     }
   }
 }
