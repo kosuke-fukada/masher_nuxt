@@ -30,10 +30,6 @@
       <Card>fugafuga</Card>
     </div>
     <Icon />
-    <Step
-      :list="list"
-      :active="1"
-    />
     <span class="text-white">{{ 'light' }}</span>
   </div>
 </template>
@@ -44,7 +40,6 @@ import Card from '@/components/atoms/Card'
 import Heading from '@/components/atoms/Heading'
 import Icon from '@/components/atoms/Icon'
 import FavButton from '@/components/molecules/button/FavButton'
-import Step from '@/components/atoms/Step'
 import TwitterUrlForm from '@/components/molecules/form/TwitterUrlForm'
 import TwitterLoginButton from '~/components/molecules/button/TwitterLoginButton'
 
@@ -56,7 +51,6 @@ export default {
     Heading,
     Icon,
     FavButton,
-    Step,
     TwitterUrlForm,
     TwitterLoginButton
   },
@@ -64,18 +58,7 @@ export default {
   data() {
     return {
       error: false,
-      favCount: 100000,
-      list: [
-        {
-          label: 'ツイートを選ぶ'
-        },
-        {
-          label: '思う存分いいねする'
-        },
-        {
-          label: 'ツイートする'
-        }
-      ]
+      favCount: 100000
     }
   },
   computed: {
