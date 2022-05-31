@@ -1,16 +1,27 @@
 <template>
   <Card>
-    <div v-html="tweet.html" />
-    <slot />
+    <div
+      v-if="!loading"
+      class="flex flex-col items-center"
+    >
+      <div v-html="tweet.html" />
+      <slot />
+    </div>
+    <Loading
+      v-else
+      color="#b8d6f9"
+    />
   </Card>
 </template>
 
 <script>
 import Card from '../../atoms/Card'
+import Loading from '~/components/atoms/Loading'
 export default {
   name: 'Tweetcard',
   components: {
-    Card
+    Card,
+    Loading
   },
   props: {
     tweetId: {
@@ -31,10 +42,12 @@ export default {
   },
   data() {
     return {
-      tweet: {}
+      tweet: {},
+      loading: false
     }
   },
   async mounted() {
+    this.loading = true
     const params = {
       tweet_id: this.tweetId,
       author_id: this.authorId,
@@ -44,6 +57,7 @@ export default {
       params
     })
     window.twttr.widgets.load()
+    this.loading = false
   }
 }
 </script>

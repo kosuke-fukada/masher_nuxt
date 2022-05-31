@@ -12,7 +12,7 @@
         class="py-6"
       >
         <Spinner
-          name="circle-fade"
+          name="ball-pulse"
           color="#b8d6f9"
         />
       </div>
