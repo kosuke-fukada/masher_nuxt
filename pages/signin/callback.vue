@@ -1,10 +1,22 @@
 <template>
-  <div />
+  <div class="w-100 h-screen">
+    <Loading
+      name="ball-pulse"
+      fixed
+      width="100"
+      height="100"
+    />
+  </div>
 </template>
 
 <script>
+import Loading from '~/components/atoms/Loading'
 export default {
   name: 'Callback',
+  components: {
+    Loading
+  },
+  layout: 'empty',
   middleware: 'isAuthenticated',
   async mounted() {
     const query = this.$route.query
