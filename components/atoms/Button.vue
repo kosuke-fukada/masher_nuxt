@@ -1,13 +1,14 @@
 <template>
-  <div
-    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-4 cursor-pointer active:scale-95 select-none"
-    :class="[buttonColor, borderColor]"
+  <button
+    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-4 active:scale-95 select-none"
+    :class="[buttonColor, borderColor, cursor]"
+    :disabled="disabled"
     @click="onClick"
   >
     <span :class="textColor">
       <slot />
     </span>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -17,6 +18,10 @@ export default {
     buttonColor: {
       type: String,
       default: 'bg-white'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -25,6 +30,9 @@ export default {
     },
     textColor() {
       return this.buttonColor === 'bg-white' ? 'text-gray-600' : 'text-white'
+    },
+    cursor() {
+      return this.disabled ? 'cursor-not-allowed' : 'cursor-pointer'
     }
   },
   methods: {
