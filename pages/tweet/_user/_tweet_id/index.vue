@@ -108,27 +108,45 @@ export default {
         this.timerId = 0
       }
       this.likeCount++
-      this.timerId = setTimeout(async () => {
-        if (this.likeId) {
-          const params = {
-            id: this.likeId,
-            user_id: this.userId,
-            tweet_id: this.tweetId,
-            author_id: this.authorId,
-            like_count: this.likeCount
-          }
-          await this.$axios.$put('/api/like_count', params)
-        } else {
-          const params = {
-            user_id: this.userId,
-            tweet_id: this.tweetId,
-            author_id: this.authorId,
-            like_count: this.likeCount
-          }
-          const createdLike = await this.$axios.$post('/api/like_count', params)
-          await this.$store.dispatch('like/setLike', createdLike)
+      if (this.likeId) {
+        this.timerId = setTimeout(async () => {
+          await this.updateLike()
+        }, 1000)
+      } else {
+        this.timerId = setTimeout(async () => {
+          await this.createLike()
+        }, 1000)
+      }
+    },
+    async updateLike() {
+      try {
+        const params = {
+          id: this.likeId,
+          user_id: this.userId,
+          tweet_id: this.tweetId,
+          author_id: this.authorId,
+          like_count: this.likeCount
         }
-      }, 1000)
+        await this.$axios.$put('/api/like_count', params)
+        this.$toast.global.addLikeSuccess()
+      } catch (e) {
+        this.$toast.global.addLikeError()
+      }
+    },
+    async createLike() {
+      try {
+        const params = {
+          user_id: this.userId,
+          tweet_id: this.tweetId,
+          author_id: this.authorId,
+          like_count: this.likeCount
+        }
+        const createdLike = await this.$axios.$post('/api/like_count', params)
+        await this.$store.dispatch('like/setLike', createdLike)
+        this.$toast.global.addLikeSuccess()
+      } catch (e) {
+        this.$toast.global.addLikeError()
+      }
     }
   }
 }

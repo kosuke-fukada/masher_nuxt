@@ -110,5 +110,27 @@ export default {
     name: 'three-bounce',
     color: '#00BFFF',
     background: '#FFFFFF'
+  },
+
+  toast: {
+    position: 'top-center',
+    duration: 1500,
+    theme: 'bubble',
+    register: [
+      {
+        name: 'addLikeSuccess',
+        message: 'いいねを追加しました！',
+        options: {
+          type: 'success'
+        }
+      },
+      {
+        name: 'addLikeError',
+        message: 'いいねを追加できませんでした',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
   }
 }
