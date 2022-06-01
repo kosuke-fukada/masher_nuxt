@@ -54,7 +54,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/toast'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -109,5 +110,27 @@ export default {
     name: 'three-bounce',
     color: '#00BFFF',
     background: '#FFFFFF'
+  },
+
+  toast: {
+    position: 'top-center',
+    duration: 1500,
+    theme: 'bubble',
+    register: [
+      {
+        name: 'addLikeSuccess',
+        message: 'いいねを追加しました！',
+        options: {
+          type: 'success'
+        }
+      },
+      {
+        name: 'addLikeError',
+        message: 'いいねを追加できませんでした',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
   }
 }
