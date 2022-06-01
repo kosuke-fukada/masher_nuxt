@@ -1,5 +1,8 @@
 <template>
-  <Button @click="favCountUp">
+  <Button
+    :disabled="disabled"
+    @click="favCountUp"
+  >
     <span class="flex items-center">
       <font-awesome-icon
         icon="heart"
@@ -21,6 +24,10 @@ export default {
     favCount: {
       type: Number,
       default: 0
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

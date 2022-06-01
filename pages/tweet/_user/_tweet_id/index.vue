@@ -8,6 +8,7 @@
       <FavButton
         v-if="isAuthenticated"
         :fav-count="likeCount"
+        :disabled="loading"
         @count="handleCount"
       />
       <div
@@ -70,7 +71,8 @@ export default {
   },
   data() {
     return {
-      timerId: 0
+      timerId: 0,
+      loading: false
     }
   },
   computed: {
@@ -120,6 +122,7 @@ export default {
     },
     async updateLike() {
       try {
+        this.loading = true
         const params = {
           id: this.likeId,
           user_id: this.userId,
@@ -131,10 +134,13 @@ export default {
         this.$toast.global.addLikeSuccess()
       } catch (e) {
         this.$toast.global.addLikeError()
+      } finally {
+        this.loading = false
       }
     },
     async createLike() {
       try {
+        this.loading = true
         const params = {
           user_id: this.userId,
           tweet_id: this.tweetId,
@@ -146,6 +152,8 @@ export default {
         this.$toast.global.addLikeSuccess()
       } catch (e) {
         this.$toast.global.addLikeError()
+      } finally {
+        this.loading = false
       }
     }
   }
