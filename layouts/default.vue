@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <Header />
     <div class="min-h-screen py-16 bg-baselight">
       <Nuxt />
