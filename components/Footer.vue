@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-16 bg-base flex justify-center items-center">
+  <div class="w-full h-16 bottom-0 absolute bg-base flex justify-center items-center">
     <span
       class="text-white cursor-pointer"
     >{{ hoge }}</span>
