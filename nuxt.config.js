@@ -122,7 +122,7 @@ export default {
   toast: {
     position: 'top-center',
     duration: 1500,
-    theme: 'bubble',
+    theme: 'outline',
     register: [
       {
         name: 'addLikeSuccess',
