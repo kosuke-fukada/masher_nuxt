@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen">
+  <div>
     <Header />
-    <div class="py-16 bg-baselight">
+    <div class="min-h-screen py-16 bg-baselight">
       <Nuxt />
     </div>
     <Footer />

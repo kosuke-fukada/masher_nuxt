@@ -99,7 +99,14 @@ export default {
   },
 
   router: {
-    middleware: []
+    middleware: [],
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: '404Error',
+        path: '*',
+        component: resolve('~/pages/404.vue')
+      })
+    }
   },
 
   serverMiddleware: [
