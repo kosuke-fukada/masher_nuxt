@@ -1,7 +1,8 @@
 const solid = [
   'faChevronDown',
   'faChevronUp',
-  'faHeart'
+  'faHeart',
+  'faShareNodes'
 ]
 const regular = []
 const brands = [
