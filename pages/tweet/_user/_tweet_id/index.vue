@@ -5,12 +5,21 @@
       :author-id="authorId"
       :author-name="authorName"
     >
-      <FavButton
-        v-if="isAuthenticated"
-        :fav-count="likeCount"
-        :disabled="loading"
-        @count="handleCount"
-      />
+      <div v-if="isAuthenticated">
+        <FavButton
+          :fav-count="likeCount"
+          :disabled="loading"
+          @count="handleCount"
+        />
+        <ShareButton
+          v-if="isSupportedWebShareApi"
+          @click="share"
+        />
+        <TwitterIntentButton
+          v-else
+          @click="twitterIntent"
+        />
+      </div>
       <div
         v-else
         class="flex flex-col items-center"
@@ -24,6 +33,8 @@
 
 <script>
 import FavButton from '~/components/molecules/button/FavButton'
+import ShareButton from '~/components/molecules/button/ShareButton'
+import TwitterIntentButton from '~/components/molecules/button/TwitterIntentButton'
 import TwitterLoginButton from '~/components/molecules/button/TwitterLoginButton'
 import Tweetcard from '~/components/molecules/card/Tweetcard'
 export default {
@@ -31,7 +42,9 @@ export default {
   components: {
     Tweetcard,
     FavButton,
-    TwitterLoginButton
+    TwitterLoginButton,
+    ShareButton,
+    TwitterIntentButton
   },
   validate({ params }) {
     return /^[A-Za-z0-9_]{1,15}$/.test(params.user) && /^\d+$/.test(Number(params.tweet_id))
@@ -101,6 +114,13 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters['user/isAuthenticated']
+    },
+    isSupportedWebShareApi() {
+      if (process.client) {
+        return !!navigator.share
+      } else {
+        return false
+      }
     }
   },
   methods: {
@@ -155,6 +175,26 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    async share() {
+      const contents = {
+        title: '',
+        text: 'このツイートに' + this.likeCount + '回いいねしました！ #Masher #無限いいね',
+        url: 'https://twitter.com/' + this.authorName + '/status/' + this.tweetId
+      }
+      try {
+        await navigator.share(contents)
+      } catch (e) {
+        //
+      }
+    },
+    twitterIntent() {
+      const params = {
+        text: 'このツイートに' + this.likeCount + '回いいねしました！ #Masher #無限いいね',
+        url: 'https://twitter.com/' + this.authorName + '/status/' + this.tweetId
+      }
+      const urlSearchParams = new URLSearchParams(params).toString()
+      window.open('https://twitter.com/intent/tweet?' + urlSearchParams, null, 'top=100,left=100,width=550,height=420')
     }
   }
 }
