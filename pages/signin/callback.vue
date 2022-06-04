@@ -27,6 +27,12 @@ export default {
     if (Object.prototype.hasOwnProperty.call(response, 'message')) {
       this.$router.replace('/')
     }
+    const userInfo = await this.$axios.$get('/api/user/')
+    if (userInfo.user_name) {
+      await this.$store.dispatch('user/setUserInfo', userInfo)
+    } else {
+      await this.$store.dispatch('user/clearUser')
+    }
     this.$router.replace('/main')
   }
 }
