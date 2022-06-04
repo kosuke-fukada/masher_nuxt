@@ -20,7 +20,7 @@ export default {
   props: {
     name: {
       type: String,
-      default: 'circle-fade'
+      default: 'ball-pulse'
     },
     color: {
       type: String,
