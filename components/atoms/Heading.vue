@@ -1,5 +1,8 @@
 <template>
-  <p :class="headingStyle">
+  <p
+    class="my-6"
+    :class="headingStyle"
+  >
     <slot />
   </p>
 </template>
