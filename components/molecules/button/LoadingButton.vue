@@ -14,6 +14,7 @@
         <Spinner
           name="ball-pulse"
           color="#b8d6f9"
+          no-fade-in
         />
       </div>
     </client-only>
