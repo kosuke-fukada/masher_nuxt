@@ -1,7 +1,6 @@
 <template>
   <div class="w-100 h-screen">
     <Loading
-      name="ball-pulse"
       fixed
       width="100"
       height="100"
