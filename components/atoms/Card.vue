@@ -1,7 +1,7 @@
 <template>
   <div
-    class="mx-4 my-4 p-4 rounded-xl border cursor-pointer min-w-xl max-w-xl transition-all ease-in-out flex flex-col items-center"
-    :class="cardStyle"
+    class="mx-4 my-4 p-4 rounded-xl cursor-pointer transition-all ease-in-out flex flex-col items-center"
+    :class="[backgroundColor, textColor, borderColor, borderWidth]"
   >
     <slot />
   </div>
@@ -10,10 +10,22 @@
 <script>
 export default {
   name: 'Card',
-  props: {},
-  computed: {
-    cardStyle() {
-      return 'bg-white text-gray-600 border-gray-300 shadow-current'
+  props: {
+    backgroundColor: {
+      type: String,
+      default: 'bg-white'
+    },
+    textColor: {
+      type: String,
+      default: 'text-gray-600'
+    },
+    borderColor: {
+      type: String,
+      default: 'border-gray-300'
+    },
+    borderWidth: {
+      type: String,
+      default: 'border'
     }
   }
 }

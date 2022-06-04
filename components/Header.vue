@@ -9,11 +9,11 @@
         @click="toTop"
       >
       <div
+        v-if="isAuthenticated"
         class="mr-8 flex items-center cursor-pointer"
         @click="toggleHeaderMenu"
       >
         <Icon
-          v-if="isAuthenticated"
           :img="avatar"
         />
         <span class="text-white text-xs">{{ userName }}</span>
@@ -25,33 +25,22 @@
     </div>
     <div
       v-show="headerMenuDisplay"
-      class="fixed top-16 left-0 w-full h-full sm:bg-backdrop md:bg-backdrop lg:bg-transparent lg:flex lg:justify-end"
+      class="fixed w-full h-full bg-backdrop"
       @click.self="toggleHeaderMenu"
     >
-      <div
-        class="lg:w-1/4 lg:h-auto"
-        @click.self="toggleHeaderMenu"
-      >
-        <div class="bg-base border-b lg:border-l border-gray-600 p-1 flex justify-center items-center">
-          <Button
-            button-color="bg-red-500"
-          >
-            ログアウト
-          </Button>
-        </div>
-      </div>
+      <UserCard />
     </div>
   </div>
 </template>
 
 <script>
-import Button from './atoms/Button.vue'
-import Icon from './atoms/Icon.vue'
+import Icon from './atoms/Icon'
+import UserCard from '~/components/molecules/card/UserCard'
 export default {
   name: 'Header',
   components: {
-    Button,
-    Icon
+    Icon,
+    UserCard
   },
   data() {
     return {
@@ -79,6 +68,7 @@ export default {
     },
     toggleHeaderMenu() {
       this.headerMenuDisplay = !this.headerMenuDisplay
+      document.body.style.overflow = this.headerMenuDisplay ? 'hidden' : ''
     }
   }
 }
