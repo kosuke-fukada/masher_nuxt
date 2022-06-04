@@ -1,6 +1,6 @@
 <template>
   <button
-    class="w-48 h-12 rounded-md flex justify-center items-center mx-4 my-4 active:scale-95 select-none"
+    class="min-w-48 h-12 rounded-md flex justify-center items-center mx-4 my-4 px-4 active:scale-95 select-none"
     :class="[buttonColor, borderColor, cursor]"
     :disabled="disabled"
     @click="onClick"
@@ -42,3 +42,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .min-w-48 {
+    min-width: 12rem;
+  }
+</style>
