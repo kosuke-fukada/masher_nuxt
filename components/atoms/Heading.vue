@@ -15,11 +15,15 @@ export default {
     bold: {
       type: Boolean,
       default: false
+    },
+    textColor: {
+      type: String,
+      default: 'text-white'
     }
   },
   computed: {
     headingStyle() {
-      const color = 'text-white'
+      const color = this.textColor
       const size = this.size
       const bold = this.bold ? 'font-bold' : ''
       return [
