@@ -10,13 +10,9 @@
           size="md"
         />
         <div class="mx-4 my-4">
-          <Heading
-            size="text-md"
-            text-color="text-base"
-            bold
-          >
+          <p class="text-md text-base font-bold">
             {{ omitDisplayName }}
-          </Heading>
+          </p>
           <p class="text-sm text-base">
             {{ userName }}
           </p>
@@ -35,15 +31,13 @@
 <script>
 import Button from '~/components/atoms/Button'
 import Card from '~/components/atoms/Card'
-import Heading from '~/components/atoms/Heading'
 import Icon from '~/components/atoms/Icon'
 export default {
   name: 'UserCard',
   components: {
     Card,
     Icon,
-    Button,
-    Heading
+    Button
   },
   computed: {
     isAuthenticated() {
@@ -59,6 +53,9 @@ export default {
       return this.isAuthenticated ? this.$store.getters['user/displayName'] : ''
     },
     omitDisplayName() {
+      if (this.displayName.length <= 10) {
+        return this.displayName
+      }
       return this.displayName.substring(0, 10) + '...'
     }
   },
