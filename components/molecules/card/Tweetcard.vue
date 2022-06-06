@@ -1,26 +1,44 @@
 <template>
   <Card>
+    <Loading
+      v-if="loading"
+      color="#b8d6f9"
+    />
     <div
-      v-if="!loading"
+      v-else-if="!error"
       class="flex flex-col items-center"
     >
       <div v-html="tweet.html" />
       <slot />
     </div>
-    <Loading
+    <div
       v-else
-      color="#b8d6f9"
-    />
+      class="flex flex-col items-center"
+    >
+      <p>
+        {{ errorMessage }}
+      </p>
+      <Button
+        button-color="bg-button"
+        @click="back"
+      >
+        トップページに戻る
+      </Button>
+    </div>
   </Card>
 </template>
 
 <script>
 import Card from '../../atoms/Card'
+import Button from '~/components/atoms/Button'
 import Loading from '~/components/atoms/Loading'
+import NotFoundError from '~/errors/NotFoundError'
+import InternalServerError from '~/errors/InternalServerError'
 export default {
   name: 'Tweetcard',
   components: {
     Card,
+    Button,
     Loading
   },
   props: {
@@ -43,21 +61,38 @@ export default {
   data() {
     return {
       tweet: {},
-      loading: false
+      loading: true,
+      error: false,
+      errorMessage: ''
     }
   },
   async mounted() {
-    this.loading = true
     const params = {
       tweet_id: this.tweetId,
       author_id: this.authorId,
       author_name: this.authorName
     }
-    this.tweet = await this.$axios.$get('/api/tweet/', {
+    await this.$axios.$get('/api/tweet/', {
       params
+    }).then(response => {
+      this.tweet = response
+    }).catch(e => {
+      if (e instanceof NotFoundError) {
+        this.error = true
+        this.errorMessage = 'このツイートは存在しません。'
+      } else if (e instanceof InternalServerError) {
+        this.error = true
+        this.errorMessage = 'サーバーエラーが発生しました。'
+      }
+    }).finally(() => {
+      this.loading = false
+      window.twttr.widgets.load()
     })
-    window.twttr.widgets.load()
-    this.loading = false
+  },
+  methods: {
+    back() {
+      this.$router.replace('/main')
+    }
   }
 }
 </script>
