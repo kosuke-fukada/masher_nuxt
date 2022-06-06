@@ -1,5 +1,6 @@
 const solid = [
   'faChevronDown',
+  'faChevronLeft',
   'faChevronUp',
   'faHeart',
   'faShareNodes'
