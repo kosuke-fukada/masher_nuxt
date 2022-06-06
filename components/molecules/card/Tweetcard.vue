@@ -1,31 +1,40 @@
 <template>
-  <Card>
-    <Loading
-      v-if="loading"
-      color="#b8d6f9"
-    />
-    <div
-      v-else-if="!error"
-      class="flex flex-col items-center"
-    >
-      <div v-html="tweet.html" />
-      <slot />
-    </div>
-    <div
-      v-else
-      class="flex flex-col items-center"
-    >
-      <p>
-        {{ errorMessage }}
-      </p>
-      <Button
-        button-color="bg-button"
-        @click="back"
+  <div class="flex flex-col items-center">
+    <Card>
+      <Loading
+        v-if="loading"
+        color="#b8d6f9"
+      />
+      <div
+        v-else-if="!error"
+        class="flex flex-col items-center"
       >
+        <div v-html="tweet.html" />
+        <slot />
+      </div>
+      <div
+        v-else
+        class="flex flex-col items-center"
+      >
+        <p>
+          {{ errorMessage }}
+        </p>
+      </div>
+    </Card>
+    <Button
+      class="flex align-bottom"
+      button-color="bg-back"
+      @click="back"
+    >
+      <div class="flex items-center">
+        <font-awesome-icon
+          icon="chevron-left"
+          class="text-white text-xs m-1"
+        />
         トップページに戻る
-      </Button>
-    </div>
-  </Card>
+      </div>
+    </Button>
+  </div>
 </template>
 
 <script>
