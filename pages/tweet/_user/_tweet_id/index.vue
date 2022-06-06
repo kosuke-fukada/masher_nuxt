@@ -28,10 +28,24 @@
         <TwitterLoginButton />
       </div>
     </Tweetcard>
+    <Button
+      class="flex align-bottom"
+      button-color="bg-back"
+      @click="backToMain"
+    >
+      <div class="flex items-center">
+        <font-awesome-icon
+          icon="chevron-left"
+          class="text-white text-xs m-1"
+        />
+        トップページに戻る
+      </div>
+    </Button>
   </div>
 </template>
 
 <script>
+import Button from '~/components/atoms/Button'
 import FavButton from '~/components/molecules/button/FavButton'
 import ShareButton from '~/components/molecules/button/ShareButton'
 import TwitterIntentButton from '~/components/molecules/button/TwitterIntentButton'
@@ -40,6 +54,7 @@ import Tweetcard from '~/components/molecules/card/Tweetcard'
 export default {
   name: 'Tweet',
   components: {
+    Button,
     Tweetcard,
     FavButton,
     TwitterLoginButton,
@@ -195,6 +210,9 @@ export default {
       }
       const urlSearchParams = new URLSearchParams(params).toString()
       window.open('https://twitter.com/intent/tweet?' + urlSearchParams, null, 'top=100,left=100,width=550,height=420')
+    },
+    backToMain() {
+      this.$router.push('/main')
     }
   }
 }

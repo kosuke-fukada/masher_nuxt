@@ -21,25 +21,11 @@
         </p>
       </div>
     </Card>
-    <Button
-      class="flex align-bottom"
-      button-color="bg-back"
-      @click="back"
-    >
-      <div class="flex items-center">
-        <font-awesome-icon
-          icon="chevron-left"
-          class="text-white text-xs m-1"
-        />
-        トップページに戻る
-      </div>
-    </Button>
   </div>
 </template>
 
 <script>
 import Card from '../../atoms/Card'
-import Button from '~/components/atoms/Button'
 import Loading from '~/components/atoms/Loading'
 import NotFoundError from '~/errors/NotFoundError'
 import InternalServerError from '~/errors/InternalServerError'
@@ -47,7 +33,6 @@ export default {
   name: 'Tweetcard',
   components: {
     Card,
-    Button,
     Loading
   },
   props: {
@@ -65,6 +50,10 @@ export default {
       type: String,
       require: true,
       default: ''
+    },
+    backButton: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -97,11 +86,6 @@ export default {
       this.loading = false
       window.twttr.widgets.load()
     })
-  },
-  methods: {
-    back() {
-      this.$router.replace('/main')
-    }
   }
 }
 </script>

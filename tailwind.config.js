@@ -20,7 +20,7 @@ module.exports = {
       baselight: '#02bab4',
       button: '#7acfd6',
       backdrop: 'rgba(0, 0, 0, 0.7)',
-      back: '#FAAC58'
+      back: '#04B45F'
     },
     screens: {
       sm: {
