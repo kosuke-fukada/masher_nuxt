@@ -1,14 +1,18 @@
 <template>
   <Card>
+    <Loading
+      v-if="loading"
+      color="#b8d6f9"
+    />
     <div
-      v-if="!loading && !error"
+      v-else-if="!error"
       class="flex flex-col items-center"
     >
       <div v-html="tweet.html" />
       <slot />
     </div>
     <div
-      v-else-if="!loading && error"
+      v-else
       class="flex flex-col items-center"
     >
       <p>
@@ -21,10 +25,6 @@
         トップページに戻る
       </Button>
     </div>
-    <Loading
-      v-else
-      color="#b8d6f9"
-    />
   </Card>
 </template>
 
