@@ -207,7 +207,7 @@ app.get('/refresh/twitter/', async (req, res) => {
     })
     res.send()
   } catch (e) {
-    logger.error('Could not get likes tweet list: ' + e.response.data.message)
+    logger.error('Could not refresh token: ' + e.response.data.message)
     res.status(e.response.status).send({
       message: e.response.data.message
     })
