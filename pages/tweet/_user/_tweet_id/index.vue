@@ -103,6 +103,11 @@ export default {
       loading: false
     }
   },
+  head() {
+    return {
+      title: '@' + this.$route.params.user + 'さんのツイート'
+    }
+  },
   computed: {
     tweetId() {
       return this.$store.getters['tweet/tweetId']

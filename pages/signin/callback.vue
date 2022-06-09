@@ -17,6 +17,11 @@ export default {
   },
   layout: 'empty',
   middleware: 'isAuthenticated',
+  head() {
+    return {
+      title: 'Loading'
+    }
+  },
   async mounted() {
     const query = this.$route.query
     const params = {

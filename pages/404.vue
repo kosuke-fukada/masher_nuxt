@@ -17,6 +17,11 @@ import Heading from '~/components/atoms/Heading'
 export default {
   components: {
     Heading
+  },
+  head() {
+    return {
+      title: '404 Not Found'
+    }
   }
 }
 </script>

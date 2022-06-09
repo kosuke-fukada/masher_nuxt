@@ -61,6 +61,12 @@ export default {
       favCount: 100000
     }
   },
+  head() {
+    return {
+      title: 'Masher - Twitter無限いいねボタン',
+      titleTemplate: null
+    }
+  },
   computed: {
     user() {
       return this.$store.getters['user/user']
