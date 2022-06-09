@@ -5,15 +5,22 @@ import * as FontAwesome from './build/fontawesome'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Masher | Twitter無限いいねボタン',
+    titleTemplate: '%s | Masher - Twitter無限いいねボタン',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: 'MasherはTwitterのいいねボタンを無限に押せるサービスです。お持ちのTwitterアカウントでログインするだけで簡単に始められます。気に入ったツイートに思う存分いいねしよう！' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'Masher - Twitter無限いいねボタン' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: process.env.SITE_URL },
+      { hid: 'og:title', property: 'og:title', content: 'Masher - Twitter無限いいねボタン' },
+      { hid: 'og:description', property: 'og:description', content: 'MasherはTwitterのいいねボタンを無限に押せるサービスです。お持ちのTwitterアカウントでログインするだけで簡単に始められます。気に入ったツイートに思う存分いいねしよう！' },
+      { hid: 'og:image', property: 'og:image', content: process.env.SITE_URL + '/masher_ogp.png' },
+      { name: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -86,7 +93,8 @@ export default {
 
   env: {
     BACKEND_API_HOST: process.env.BACKEND_API_HOST,
-    SESSION_SECRET: process.env.SESSION_SECRET
+    SESSION_SECRET: process.env.SESSION_SECRET,
+    SITE_URL: process.env.SITE_URL
   },
 
   server: {

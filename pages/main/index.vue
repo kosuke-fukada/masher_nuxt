@@ -60,6 +60,11 @@ export default {
       loading: false
     }
   },
+  head() {
+    return {
+      title: 'TOP'
+    }
+  },
   computed: {
     tweetList: {
       get() {
