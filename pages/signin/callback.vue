@@ -1,10 +1,6 @@
 <template>
-  <div class="w-100 h-screen">
-    <Loading
-      fixed
-      width="100"
-      height="100"
-    />
+  <div class="w-full h-screen flex justify-center">
+    <Loading />
   </div>
 </template>
 

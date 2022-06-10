@@ -1,9 +1,6 @@
 <template>
   <client-only>
-    <div
-      class="inset-1/2"
-      :class="position"
-    >
+    <div class="top-80 m-auto">
       <Spinner
         :name="name"
         :color="color"
@@ -26,10 +23,6 @@ export default {
       type: String,
       default: '#FFFFFF'
     },
-    fixed: {
-      type: Boolean,
-      default: false
-    },
     width: {
       type: String,
       default: ''
@@ -37,11 +30,6 @@ export default {
     height: {
       type: String,
       default: ''
-    }
-  },
-  computed: {
-    position() {
-      return this.fixed ? 'fixed' : ''
     }
   }
 }
