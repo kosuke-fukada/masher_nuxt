@@ -1,83 +1,63 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center mb-8">
     <Heading
-      size="text-4xl"
+      size="text-7xl"
       :bold="true"
     >
-      思う存分、<br>いいねしよう。
+      もっと<br>いいね<br>したい
     </Heading>
-    <div v-if="user">
-      <p>{{ user.uid }}</p>
-      <p>{{ user.twitterAccountId }}</p>
-      <p>{{ user.displayName }}</p>
+    <TwitterLoginButton />
+    <div class="my-4">
+      <p class="text-white text-center">
+        気に入ったツイートにいいねする時、<br>
+        こんな風に感じることはないでしょうか。
+      </p>
+      <p class="text-white text-center font-bold text-2xl mt-8">
+        なぜいいねボタンは<br>1回しか押せないのか
+      </p>
+      <p class="text-white text-center mt-8">
+        めちゃくちゃ刺さったツイートも、<br>
+        「いいじゃん」ぐらいのツイートも、<br>
+        Twitter上では同じ「1いいね」。
+      </p>
+      <p class="text-white text-center mt-8">
+        でも実際にはツイートごとに<br>
+        「いいね」と感じる度合いは違うはず。<br>
+        もっといいねボタン押したい。
+      </p>
+      <p class="text-white text-center mt-8">
+        Masherはそんな思いに応えるサービスです。<br>
+        尊い絵に心が揺さぶられた時、<br>
+        ネタツイートに爆笑した時、<br>
+        ツイートに励まされた時に<br>
+        Twitterでいいねしておけば、<br>
+        Masherで好きなだけいいねボタンが押せます。
+      </p>
+      <p class="text-white text-center mt-8">
+        お持ちのTwitterアカウントで<br>
+        ログインするだけで簡単に始められます。<br>
+        ぜひお気軽にどうぞ。
+      </p>
     </div>
-    <twitter-url-form
-      :error="error"
-      @error="twitterUrlFormError"
-    />
-    <Button
-      button-color="bg-base"
-    >
-      ボタン
-    </Button>
-    <fav-button
-      :fav-count="favCount"
-      @count="favCountUp"
-    />
-    <twitter-login-button />
-    <div class="flex">
-      <Card>hogehoge</Card>
-      <Card>fugafuga</Card>
-    </div>
-    <Icon />
-    <span class="text-white">{{ 'light' }}</span>
+    <TwitterLoginButton />
   </div>
 </template>
 
 <script>
-import Button from '@/components/atoms/Button'
-import Card from '@/components/atoms/Card'
 import Heading from '@/components/atoms/Heading'
-import Icon from '@/components/atoms/Icon'
-import FavButton from '@/components/molecules/button/FavButton'
-import TwitterUrlForm from '@/components/molecules/form/TwitterUrlForm'
 import TwitterLoginButton from '~/components/molecules/button/TwitterLoginButton'
 
 export default {
   name: 'Index',
   components: {
-    Button,
-    Card,
     Heading,
-    Icon,
-    FavButton,
-    TwitterUrlForm,
     TwitterLoginButton
   },
   middleware: 'isAuthenticated',
-  data() {
-    return {
-      error: false,
-      favCount: 100000
-    }
-  },
   head() {
     return {
       title: 'Masher - Twitter無限いいねボタン',
       titleTemplate: null
-    }
-  },
-  computed: {
-    user() {
-      return this.$store.getters['user/user']
-    }
-  },
-  methods: {
-    twitterUrlFormError(value) {
-      this.error = value
-    },
-    favCountUp() {
-      this.favCount++
     }
   }
 }
