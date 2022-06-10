@@ -1,10 +1,10 @@
 <template>
-  <div class="fixed bottom-4 left-1/2">
+  <div class="fixed bottom-4 w-full">
     <Card
       text-color="text-slate-800"
     >
       <p class="text-xs">
-        当サイトではCookieを使用します。Cookieの使用に関する詳細はプライバシーポリシーをご覧ください。
+        当サイトではCookieを使用します。<br>Cookieに関する詳細はプライバシーポリシーをご覧ください。
       </p>
       <Button
         button-color="bg-button"
