@@ -108,20 +108,16 @@ app.get('/signout/', async (req, res) => {
 })
 
 app.get('/user/', async (req, res) => {
-  if (!req.cookies.masher_session) {
-    res.send()
-    return
+  const params = {}
+  if (req.cookies.masher_session) {
+    params.headers = {}
+    params.headers.Cookie = req.headers.cookie
   }
 
   try {
-    const userInfo = await axios.get('/user',
-      {
-        headers: {
-          Cookie: req.headers.cookie
-        }
-      }
-    )
-    res.send(userInfo.data)
+    const response = await axios.get('/user', params)
+    res.setHeader('set-cookie', response.headers['set-cookie'])
+    res.send(response.data)
   } catch (e) {
     logger.error('Could not get user info: ' + e.response.data.message)
     res.status(e.response.status).send({
@@ -278,7 +274,7 @@ app.post('/like_count', async (req, res) => {
     !req.body.author_id ||
     !req.body.like_count
   ) {
-    res.send()
+    res.status(400).send()
     return
   }
 
@@ -297,7 +293,6 @@ app.post('/like_count', async (req, res) => {
     })
     res.send(createdLike.data)
   } catch (e) {
-    console.log(e)
     logger.error('Could not create like count: ' + e.response.data.message)
     res.status(e.response.status).send({
       message: e.response.data.message
@@ -339,10 +334,40 @@ app.put('/like_count', async (req, res) => {
     })
     res.status(204).send()
   } catch (e) {
-    console.log(e)
     logger.error('Could not update like count: ' + e.response.data.message)
     res.status(e.response.status).send({
       message: e.response.data.message
+    })
+  }
+})
+
+app.post('/inquiry', async (req, res) => {
+  if (!req.body.name ||
+    !req.body.email ||
+    !req.body.body
+  ) {
+    res.status(400).send()
+    return
+  }
+
+  try {
+    const params = {
+      name: req.body.name,
+      email: req.body.email,
+      body: req.body.body
+    }
+    await axios.post('/inquiry', params, {
+      headers: {
+        Cookie: req.headers.cookie,
+        'X-XSRF-TOKEN': req.headers['x-xsrf-token']
+      }
+    })
+    res.status(204).send()
+  } catch (e) {
+    logger.error('Could not complete inquiry: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message,
+      errors: e.response.data.errors
     })
   }
 })

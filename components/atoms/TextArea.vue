@@ -1,15 +1,15 @@
 <template>
   <div class="mx-4 my-2">
-    <input
+    <textarea
       class="border-2 rounded-md input-width"
       :class="[borderColor]"
       :value="value"
-      type="text"
       :placeholder="placeholder"
-      :required="required"
+      :maxlength="maxLength"
+      :rows="rows"
       @blur="onBlur"
       @input="onInput"
-    >
+    />
     <p
       class="text-xs text-red-600 my-1 h-4"
     >
@@ -30,9 +30,13 @@ export default {
       type: String,
       default: ''
     },
-    required: {
-      type: Boolean,
-      default: false
+    maxLength: {
+      type: Number,
+      default: 500
+    },
+    rows: {
+      type: Number,
+      default: 5
     },
     errorMessage: {
       type: String,
