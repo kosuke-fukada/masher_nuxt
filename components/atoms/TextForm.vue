@@ -1,11 +1,12 @@
 <template>
-  <div class="mx-4 my-4 w-3/4">
+  <div class="mx-4 my-2">
     <input
-      class="border-2 rounded-md"
-      :class="[width, borderColor]"
+      class="border-2 rounded-md input-width"
+      :class="[borderColor]"
       :value="value"
       type="text"
       :placeholder="placeholder"
+      :required="required"
       @blur="onBlur"
       @input="onInput"
     >
@@ -29,9 +30,9 @@ export default {
       type: String,
       default: ''
     },
-    width: {
-      type: String,
-      default: 'w-72'
+    required: {
+      type: Boolean,
+      default: false
     },
     errorMessage: {
       type: String,
@@ -53,3 +54,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.input-width {
+  width: min(100%, 600px);
+}
+</style>
