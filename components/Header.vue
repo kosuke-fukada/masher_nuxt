@@ -4,7 +4,7 @@
       class="fixed top-0 left-0 w-full h-16 bg-base flex justify-between items-center"
     >
       <img
-        :src="require('~/assets/images/masher_logo_white.png')"
+        src="/masher_logo_white.png"
         class="cursor-pointer h-8 ml-8"
         @click="toTop"
       >
