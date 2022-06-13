@@ -25,10 +25,7 @@ export default {
       params: query
     }
     try {
-      const response = await this.$axios.$get('/api/signin/twitter/callback/', params)
-      if (Object.prototype.hasOwnProperty.call(response, 'message')) {
-        this.$router.replace('/')
-      }
+      await this.$axios.$get('/api/signin/twitter/callback/', params)
       const userInfo = await this.$axios.$get('/api/user/')
       if (userInfo.user_name) {
         await this.$store.dispatch('user/setUserInfo', userInfo)
