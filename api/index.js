@@ -53,7 +53,7 @@ app.get('/signin/twitter/callback/', async (req, res) => {
   const query = req.query
   if (Object.prototype.hasOwnProperty.call(query, 'error')) {
     logger.error('Authorize canceled.')
-    res.send({
+    res.status(403).send({
       message: 'Authorize canceled.'
     })
     return
@@ -83,7 +83,7 @@ app.get('/signin/twitter/callback/', async (req, res) => {
         path: '/'
       })
     })
-    res.send({
+    res.status(e.response.status).send({
       message: e.response.data.message
     })
   }

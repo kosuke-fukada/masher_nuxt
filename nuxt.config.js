@@ -131,6 +131,8 @@ export default {
     position: 'top-center',
     duration: 1500,
     theme: 'outline',
+    fullWidth: false,
+    fitToScreen: false,
     register: [
       {
         name: 'addLikeSuccess',
@@ -142,6 +144,20 @@ export default {
       {
         name: 'addLikeError',
         message: 'いいねを追加できませんでした',
+        options: {
+          type: 'error'
+        }
+      },
+      {
+        name: 'signinCancelled',
+        message: 'ログインをキャンセルしました',
+        options: {
+          type: 'info'
+        }
+      },
+      {
+        name: 'serverError',
+        message: 'エラーが発生しました',
         options: {
           type: 'error'
         }
