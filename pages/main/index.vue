@@ -46,6 +46,7 @@ export default {
     LoadingButton,
     Heading
   },
+  middleware: 'authenticatedUserOnly',
   async asyncData({ $axios, store, req }) {
     const params = {}
     if (process.server) {

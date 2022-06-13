@@ -61,6 +61,7 @@ export default {
     ShareButton,
     TwitterIntentButton
   },
+  middleware: 'authenticatedUserOnly',
   validate({ params }) {
     return /^[A-Za-z0-9_]{1,15}$/.test(params.user) && /^\d+$/.test(Number(params.tweet_id))
   },
