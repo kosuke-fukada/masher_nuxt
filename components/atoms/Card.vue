@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mx-4 my-4 p-4 rounded-xl cursor-pointer transition-all ease-in-out flex flex-col items-center"
+    class="mx-4 my-4 p-4 rounded-xl flex flex-col items-center"
     :class="[backgroundColor, textColor, borderColor, borderWidth]"
   >
     <slot />
