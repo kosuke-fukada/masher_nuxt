@@ -59,6 +59,15 @@ export default {
       title: 'Masher - Twitter無限いいねボタン',
       titleTemplate: null
     }
+  },
+  mounted() {
+    if (this.$route.query) {
+      if (this.$route.query.cancelled) {
+        this.$toast.global.signinCancelled()
+      } else if (this.$route.query.error) {
+        this.$toast.global.serverError()
+      }
+    }
   }
 }
 </script>
