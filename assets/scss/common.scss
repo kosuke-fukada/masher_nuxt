@@ -1,0 +1,42 @@
+.toasted-container {
+  min-width: unset !important;
+
+  &.top-center {
+    top: 10% !important;
+    left: 50% !important;
+    -webkit-transform: translateX(-50%) !important;
+    transform: translateX(-50%) !important;
+    width: fit-content;
+  }
+
+  >.toasted {
+    top: 35px;
+    width: auto;
+    clear: both;
+    margin-top: 10px;
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    word-break: normal;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    box-sizing: inherit;
+
+    &.outline {
+      border-radius: 30px;
+      min-height: 38px;
+      line-height: 1.1em;
+      background-color: #fff;
+      border: 1px solid #676767;
+      padding: 0 20px;
+      font-size: 15px;
+      color: #676767;
+      box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
+      font-weight: 700;
+    }
+  }
+}
