@@ -24,7 +24,7 @@
         v-else
         class="flex flex-col items-center"
       >
-        <span>ログインしていいねボタンを押しまくろう</span>
+        <span class="font-bold text-sm my-2">＼ログインしていいねボタンを押しまくろう／</span>
         <TwitterLoginButton />
       </div>
     </Tweetcard>
@@ -61,22 +61,24 @@ export default {
     ShareButton,
     TwitterIntentButton
   },
-  middleware: 'authenticatedUserOnly',
   validate({ params }) {
     return /^[A-Za-z0-9_]{1,15}$/.test(params.user) && /^\d+$/.test(Number(params.tweet_id))
   },
   async asyncData({ store, route, $axios }) {
     if (!store.getters['tweet/isSetTweet']) {
-      const params = {
-        user_name: route.params.user
-      }
-      const authorInfo = await $axios.$get('/api/user/twitter/', {
-        params
-      })
       const tweet = {
         tweet_id: route.params.tweet_id,
-        author_id: authorInfo.data.id,
+        author_id: '',
         author_name: route.params.user
+      }
+      if (store.getters['user/isAuthenticated']) {
+        const params = {
+          user_name: route.params.user
+        }
+        const authorInfo = await $axios.$get('/api/user/twitter/', {
+          params
+        })
+        tweet.author_id = authorInfo.data.id
       }
       await store.dispatch('tweet/setTweet', tweet)
     }
