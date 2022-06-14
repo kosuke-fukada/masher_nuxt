@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <Header />
-    <div class="min-h-screen py-16 bg-baselight">
+    <div class="min-h-screen py-20 bg-baselight">
       <Nuxt />
     </div>
     <Footer />
