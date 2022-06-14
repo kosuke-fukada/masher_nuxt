@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center pb-8">
     <Heading
       size="text-2xl"
       bold
