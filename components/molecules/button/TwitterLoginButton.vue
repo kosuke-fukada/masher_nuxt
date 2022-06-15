@@ -12,7 +12,10 @@
         Twitterでログイン
       </span>
     </Button>
-    <span class="text-xs text-white">
+    <span
+      class="text-xs"
+      :class="privacyPolicyLinkColor"
+    >
       <nuxt-link
         class="border-b-2"
         to="/privacy"
@@ -31,6 +34,12 @@ export default {
   name: 'TwitterLoginButton',
   components: {
     Button
+  },
+  props: {
+    privacyPolicyLinkColor: {
+      type: String,
+      default: 'text-white'
+    }
   },
   methods: {
     signinWithTwitter() {
