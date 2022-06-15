@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center mb-8">
     <Tweetcard
       :tweet-id="tweetId"
       :author-id="authorId"
@@ -25,7 +25,9 @@
         class="flex flex-col items-center"
       >
         <span class="font-bold text-sm my-2">＼ログインしていいねボタンを押しまくろう／</span>
-        <TwitterLoginButton />
+        <TwitterLoginButton
+          privacy-policy-link-color="text-gray-600"
+        />
       </div>
     </Tweetcard>
     <Button
