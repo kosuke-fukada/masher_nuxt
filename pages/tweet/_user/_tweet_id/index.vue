@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center mb-8">
     <Tweetcard
       :tweet-id="tweetId"
       :author-id="authorId"
