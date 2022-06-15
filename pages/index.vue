@@ -12,7 +12,7 @@
         気に入ったツイートにいいねする時、<br>
         こんな風に感じることはないでしょうか。
       </p>
-      <p class="text-white text-center font-bold text-2xl mt-8">
+      <p class="text-white text-center font-bold text-2xl mt-12">
         なぜいいねボタンは<br>1回しか押せないのか
       </p>
       <p class="text-white text-center mt-8">
@@ -28,8 +28,8 @@
       <p class="text-white text-center mt-8">
         Masherはそんな思いに応えるサービスです。<br>
         尊い絵に心が揺さぶられた時、<br>
-        ネタツイートに爆笑した時、<br>
-        ツイートに励まされた時に<br>
+        馬鹿馬鹿しいネタに爆笑した時、<br>
+        優しい言葉に励まされた時、<br>
         Twitterでいいねしておけば、<br>
         Masherで好きなだけいいねボタンが押せます。
       </p>
