@@ -25,7 +25,9 @@
         class="flex flex-col items-center"
       >
         <span class="font-bold text-sm my-2">＼ログインしていいねボタンを押しまくろう／</span>
-        <TwitterLoginButton />
+        <TwitterLoginButton
+          privacy-policy-link-color="text-gray-600"
+        />
       </div>
     </Tweetcard>
     <Button
