@@ -6,30 +6,32 @@
     >
       Twitterのいいね一覧
     </Heading>
-    <div
-      v-for="tweet in tweetList"
-      :key="tweet.tweet_id"
-    >
-      <Tweetcard
-        :tweet-id="tweet.tweet_id"
-        :author-id="tweet.author_id"
-        :author-name="tweet.author_name"
+    <template v-if="tweetList.length">
+      <div
+        v-for="tweet in tweetList"
+        :key="tweet.tweet_id"
       >
-        <Button
-          button-color="bg-button"
-          @click="toTweetDetailPage(tweet)"
+        <Tweetcard
+          :tweet-id="tweet.tweet_id"
+          :author-id="tweet.author_id"
+          :author-name="tweet.author_name"
         >
-          このツイートを見る
-        </Button>
-      </Tweetcard>
-    </div>
-    <LoadingButton
-      v-if="nextToken"
-      :loading="loading"
-      @click="handleLoading"
-    >
-      もっと見る
-    </LoadingButton>
+          <Button
+            button-color="bg-button"
+            @click="toTweetDetailPage(tweet)"
+          >
+            このツイートを見る
+          </Button>
+        </Tweetcard>
+      </div>
+      <LoadingButton
+        v-if="nextToken"
+        :loading="loading"
+        @click="handleLoading"
+      >
+        もっと見る
+      </LoadingButton>
+    </template>
   </div>
 </template>
 
@@ -47,14 +49,18 @@ export default {
     Heading
   },
   middleware: 'authenticatedUserOnly',
-  async asyncData({ $axios, store, req }) {
+  async asyncData({ $axios, store, req, app }) {
     const params = {}
     if (process.server) {
       params.headers = req.headers
     }
-    const response = await $axios.$get('/api/likes/', params)
-    store.commit('likeTweetList/setTweetList', response.tweetList)
-    store.commit('likeTweetList/setNextToken', response.nextToken)
+    try {
+      const response = await $axios.$get('/api/likes/', params)
+      store.commit('likeTweetList/setTweetList', response.tweetList)
+      store.commit('likeTweetList/setNextToken', response.nextToken)
+    } catch (e) {
+      app.$toast.global.serverError()
+    }
   },
   data() {
     return {
@@ -87,15 +93,20 @@ export default {
   methods: {
     async handleLoading() {
       this.loading = true
-      const response = await this.$axios.$get('/api/likes/', {
-        params: {
-          next_token: this.nextToken
-        }
-      })
-      const updatedTweetList = this.tweetList.concat(response.tweetList)
-      this.tweetList = updatedTweetList
-      this.nextToken = response.nextToken
-      this.loading = false
+      try {
+        const response = await this.$axios.$get('/api/likes/', {
+          params: {
+            next_token: this.nextToken
+          }
+        })
+        const updatedTweetList = this.tweetList.concat(response.tweetList)
+        this.tweetList = updatedTweetList
+        this.nextToken = response.nextToken
+      } catch (e) {
+        this.$toast.global.serverError()
+      } finally {
+        this.loading = false
+      }
     },
     async toTweetDetailPage(tweet) {
       await this.$store.dispatch('tweet/setTweet', tweet)

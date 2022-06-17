@@ -5,7 +5,7 @@
       :author-id="authorId"
       :author-name="authorName"
     >
-      <div v-if="isAuthenticated">
+      <div v-if="isAuthenticated && authorId">
         <FavButton
           :fav-count="likeCount"
           :disabled="loading"
@@ -66,7 +66,7 @@ export default {
   validate({ params }) {
     return /^[A-Za-z0-9_]{1,15}$/.test(params.user) && /^\d+$/.test(Number(params.tweet_id))
   },
-  async asyncData({ store, route, $axios }) {
+  async asyncData({ store, route, $axios, app }) {
     if (!store.getters['tweet/isSetTweet']) {
       const tweet = {
         tweet_id: route.params.tweet_id,
@@ -77,10 +77,14 @@ export default {
         const params = {
           user_name: route.params.user
         }
-        const authorInfo = await $axios.$get('/api/user/twitter/', {
-          params
-        })
-        tweet.author_id = authorInfo.data.id
+        try {
+          const authorInfo = await $axios.$get('/api/user/twitter/', {
+            params
+          })
+          tweet.author_id = authorInfo.data.id
+        } catch (e) {
+          app.$toast.global.serverError()
+        }
       }
       await store.dispatch('tweet/setTweet', tweet)
     }
