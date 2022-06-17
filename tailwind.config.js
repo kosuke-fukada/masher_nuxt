@@ -12,15 +12,11 @@ module.exports = {
     colors: {
       ...colors,
       twitter: '#1DA1F2',
-      light: {
-        background: '#FFFFFF',
-        text: '#424242'
-      },
       base: '#04B4AE',
       baselight: '#02bab4',
       button: '#7acfd6',
-      backdrop: 'rgba(0, 0, 0, 0.7)',
-      back: '#04B45F'
+      backdrop: 'rgba(0, 0, 0, 0.5)',
+      back: '#29CCC7'
     },
     screens: {
       sm: {

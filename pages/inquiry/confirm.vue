@@ -35,7 +35,7 @@
           />
         </div>
         <Button
-          button-color="bg-base"
+          button-color="bg-button"
           @click="submit"
         >
           この内容で送信する

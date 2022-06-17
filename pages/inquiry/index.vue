@@ -42,7 +42,7 @@
           />
         </div>
         <Button
-          button-color="bg-base"
+          button-color="bg-button"
           @click="toConfirm"
         >
           入力内容を確認する
