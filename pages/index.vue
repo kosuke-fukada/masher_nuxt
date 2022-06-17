@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col items-center mb-8">
+  <div
+    ref="firstView"
+    class="flex flex-col items-center mb-8 first-view"
+  >
     <Heading
       size="text-7xl"
       :bold="true"
@@ -61,6 +64,7 @@ export default {
     }
   },
   mounted() {
+    this.$refs.firstView.classList.add('show')
     if (this.$route.query) {
       if (this.$route.query.cancelled) {
         this.$toast.global.signinCancelled()
@@ -71,3 +75,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.first-view {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.first-view.show {
+  opacity: 1;
+  transform: none;
+  transition: all .5s linear;
+}
+</style>
