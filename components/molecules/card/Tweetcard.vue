@@ -1,10 +1,14 @@
 <template>
   <div class="flex flex-col items-center">
-    <Card>
-      <Loading
+    <Card class="tweet-card">
+      <div
         v-if="loading"
-        color="#b8d6f9"
-      />
+        class="flex flex-col items-center"
+      >
+        <Loading
+          color="#b8d6f9"
+        />
+      </div>
       <div
         v-else-if="!error"
         class="flex flex-col items-center"
@@ -91,7 +95,11 @@ export default {
 </script>
 
 <style>
-  .twitter-tweet > iframe {
-    width: min(80vw, 542px) !important;
-  }
+.twitter-tweet > iframe {
+  width: min(80vw, 542px) !important;
+}
+
+.tweet-card > div {
+  width: min(80vw, 542px) !important;
+}
 </style>
