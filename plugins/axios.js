@@ -14,7 +14,7 @@ export default ({ $axios, error }) => {
       throw new BadRequestError(e.response.data.message)
     } else if (e.response.status === 422) {
       throw new ValidationError(e.response.data.message, e.response.data.errors)
-    } else if (e.response.status === 500) {
+    } else {
       throw new InternalServerError(e.response.data.message)
     }
   })
