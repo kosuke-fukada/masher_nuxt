@@ -6,12 +6,12 @@
 export default {
   name: 'Index',
   middleware: 'isAuthenticated',
-  async asyncData({ redirect, router, $axios }) {
+  async asyncData({ redirect, app, $axios }) {
     try {
       const url = await $axios.$get('/api/signin/twitter/')
       redirect(302, url)
     } catch (e) {
-      router.replace({
+      app.$router.replace({
         path: '/',
         query: {
           error: 'true'
