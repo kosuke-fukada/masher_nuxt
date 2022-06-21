@@ -16,6 +16,7 @@ module.exports = {
       baselight: '#02bab4',
       button: '#7acfd6',
       backdrop: 'rgba(0, 0, 0, 0.5)',
+      sidemenu: 'rgba(0, 0, 0, 0.8)',
       back: '#29CCC7'
     },
     screens: {

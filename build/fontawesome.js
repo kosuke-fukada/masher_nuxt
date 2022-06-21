@@ -1,4 +1,5 @@
 const solid = [
+  'faBars',
   'faChevronDown',
   'faChevronLeft',
   'faChevronUp',
