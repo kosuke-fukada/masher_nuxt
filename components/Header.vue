@@ -10,37 +10,42 @@
       >
       <div
         v-if="isAuthenticated"
-        class="mr-8 flex items-center cursor-pointer"
+        class="mr-4 flex items-center cursor-pointer"
         @click="toggleHeaderMenu"
       >
         <Icon
           :img="avatar"
         />
-        <span class="text-white text-xs">{{ userName }}</span>
         <font-awesome-icon
-          :icon="headerChevronIcon"
-          class="text-white text-xs m-1"
+          icon="bars"
+          class="text-white text-2xl mr-4"
         />
       </div>
     </div>
-    <div
-      v-show="headerMenuDisplay"
-      class="fixed w-full h-full bg-backdrop z-50"
-      @click.self="toggleHeaderMenu"
-    >
-      <UserCard />
-    </div>
+    <transition name="sidemenu-backdrop">
+      <div
+        v-show="headerMenuDisplay"
+        class="fixed w-full h-screen bg-backdrop z-50"
+        @click.self="toggleHeaderMenu"
+      />
+    </transition>
+    <transition name="sidemenu">
+      <SideMenu
+        v-show="headerMenuDisplay"
+        @close="closeSideMenu"
+      />
+    </transition>
   </div>
 </template>
 
 <script>
 import Icon from './atoms/Icon'
-import UserCard from '~/components/molecules/card/UserCard'
+import SideMenu from './SideMenu'
 export default {
   name: 'Header',
   components: {
     Icon,
-    UserCard
+    SideMenu
   },
   data() {
     return {
@@ -48,9 +53,6 @@ export default {
     }
   },
   computed: {
-    headerChevronIcon() {
-      return this.headerMenuDisplay ? 'chevron-up' : 'chevron-down'
-    },
     isAuthenticated() {
       return this.$store.getters['user/isAuthenticated']
     },
@@ -69,7 +71,31 @@ export default {
     toggleHeaderMenu() {
       this.headerMenuDisplay = !this.headerMenuDisplay
       document.body.style.overflow = this.headerMenuDisplay ? 'hidden' : ''
+    },
+    closeSideMenu() {
+      this.headerMenuDisplay = false
+      document.body.style.overflow = ''
     }
   }
 }
 </script>
+
+<style scoped>
+.sidemenu-enter-active, .sidemenu-leave-active {
+  transform: translate(0px, 0px);
+  transition: transform .3s cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+
+.sidemenu-enter, .sidemenu-leave-to {
+  transform: translateX(100vw) translateX(0px);
+}
+
+.sidemenu-backdrop-enter-active, .sidemenu-backdrop-leave-active {
+  opacity: 1;
+  transition: opacity .1s linear;
+}
+
+.sidemenu-backdrop-enter, .sidemenu-backdrop-leave-to {
+  opacity: 0;
+}
+</style>
