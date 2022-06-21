@@ -159,7 +159,37 @@ app.get('/user/twitter/', async (req, res) => {
   }
 })
 
-app.get('/likes/', async (req, res) => {
+app.get('/likes', async (req, res) => {
+  if (!req.cookies.masher_session) {
+    res.status(403).send({
+      message: 'Forbidden.'
+    })
+  }
+
+  try {
+    const likeList = await axios.get('/likes',
+      {
+        headers: {
+          Cookie: req.headers.cookie
+        },
+        params: {
+          user_id: req.query.user_id,
+          order_key: req.query.order_key,
+          order_value: req.query.order_value,
+          page: req.query.page
+        }
+      }
+    )
+    res.send(likeList.data)
+  } catch (e) {
+    logger.error('Could not get like list: ' + e.response.data.message)
+    res.status(e.response.status).send({
+      message: e.response.data.message
+    })
+  }
+})
+
+app.get('/likes/twitter', async (req, res) => {
   if (!req.cookies.masher_session) {
     res.status(403).send({
       message: 'Forbidden.'
