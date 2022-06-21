@@ -1,7 +1,7 @@
 <template>
   <div class="select-none">
     <div
-      class="fixed top-0 left-0 w-full h-16 bg-base flex justify-between items-center"
+      class="fixed top-0 left-0 w-full h-16 bg-base flex justify-between items-center z-40"
     >
       <img
         src="/masher_logo_white.png"
@@ -25,7 +25,7 @@
     </div>
     <div
       v-show="headerMenuDisplay"
-      class="fixed w-full h-full bg-backdrop"
+      class="fixed w-full h-full bg-backdrop z-50"
       @click.self="toggleHeaderMenu"
     >
       <UserCard />
