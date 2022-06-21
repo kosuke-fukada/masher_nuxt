@@ -55,7 +55,7 @@ export default {
       params.headers = req.headers
     }
     try {
-      const response = await $axios.$get('/api/likes/', params)
+      const response = await $axios.$get('/api/likes/twitter', params)
       store.commit('likeTweetList/setTweetList', response.tweetList)
       store.commit('likeTweetList/setNextToken', response.nextToken)
     } catch (e) {
@@ -94,7 +94,7 @@ export default {
     async handleLoading() {
       this.loading = true
       try {
-        const response = await this.$axios.$get('/api/likes/', {
+        const response = await this.$axios.$get('/api/likes/twitter', {
           params: {
             next_token: this.nextToken
           }
