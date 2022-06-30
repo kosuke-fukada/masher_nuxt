@@ -3,13 +3,16 @@
     :disabled="disabled"
     @click="favCountUp"
   >
-    <span class="flex items-center">
-      <font-awesome-icon
-        icon="heart"
-        class="mr-2 text-red-600"
-      />
-      {{ favCount }}
-    </span>
+    <div class="flex items-center justify-center font-bold text-gray-500 flex-wrap">
+      <span class="mr-1">
+        <font-awesome-icon
+          icon="heart"
+          class="mr-1 text-red-600"
+        />
+        {{ favCount }}
+      </span>
+      <span>いいね</span>
+    </div>
   </Button>
 </template>
 
