@@ -32,6 +32,13 @@
         もっと見る
       </LoadingButton>
     </template>
+    <template v-else>
+      <div class="my-8">
+        <p class="text-white">
+          まだいいねがありません。
+        </p>
+      </div>
+    </template>
   </div>
 </template>
 
