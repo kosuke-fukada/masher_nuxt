@@ -38,14 +38,14 @@ export default {
         this.$router.replace({
           path: '/',
           query: {
-            cancelled: 'true'
+            reason: 'cancel'
           }
         })
       } else {
         this.$router.replace({
           path: '/',
           query: {
-            error: 'true'
+            reason: 'error'
           }
         })
       }

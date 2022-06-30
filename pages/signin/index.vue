@@ -1,20 +1,31 @@
 <template>
-  <div />
+  <div class="w-full h-screen flex justify-center">
+    <Loading />
+  </div>
 </template>
 
 <script>
+import Loading from '~/components/atoms/Loading'
 export default {
   name: 'Index',
+  components: {
+    Loading
+  },
   middleware: 'isAuthenticated',
-  async asyncData({ redirect, app, $axios }) {
+  head() {
+    return {
+      title: 'Signin'
+    }
+  },
+  async mounted() {
     try {
-      const url = await $axios.$get('/api/signin/twitter/')
-      redirect(302, url)
+      const url = await this.$axios.$get('/api/signin/twitter/')
+      location.href = url
     } catch (e) {
-      app.router.push({
+      this.$router.push({
         path: '/',
         query: {
-          error: 'true'
+          reason: 'error'
         }
       })
     }
