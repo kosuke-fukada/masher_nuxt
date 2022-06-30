@@ -11,14 +11,16 @@
           :disabled="loading"
           @count="handleCount"
         />
-        <ShareButton
-          v-if="isSupportedWebShareApi"
-          @click="share"
-        />
-        <TwitterIntentButton
-          v-else
-          @click="twitterIntent"
-        />
+        <template v-if="likeCount">
+          <ShareButton
+            v-if="isSupportedWebShareApi"
+            @click="share"
+          />
+          <TwitterIntentButton
+            v-else
+            @click="twitterIntent"
+          />
+        </template>
       </div>
       <div
         v-else
@@ -208,7 +210,7 @@ export default {
     async share() {
       const contents = {
         title: '',
-        text: 'このツイートに' + this.likeCount + '回いいねしました！ #Masher #無限いいね',
+        text: '#Masher でこのツイートに' + this.likeCount + '回いいねしました！ @masher_app #無限いいね',
         url: 'https://twitter.com/' + this.authorName + '/status/' + this.tweetId
       }
       try {
@@ -219,7 +221,7 @@ export default {
     },
     twitterIntent() {
       const params = {
-        text: 'このツイートに' + this.likeCount + '回いいねしました！ #Masher #無限いいね',
+        text: '#Masher でこのツイートに' + this.likeCount + '回いいねしました！ @masher_app #無限いいね',
         url: 'https://twitter.com/' + this.authorName + '/status/' + this.tweetId
       }
       const urlSearchParams = new URLSearchParams(params).toString()
