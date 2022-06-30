@@ -63,6 +63,15 @@ export default {
       titleTemplate: null
     }
   },
+  watch: {
+    $route(to) {
+      if (to.query.cancelled) {
+        this.$toast.global.signinCancelled()
+      } else if (to.query.error) {
+        this.$toast.global.serverError()
+      }
+    }
+  },
   mounted() {
     this.$refs.firstView.classList.add('show')
     if (this.$route.query) {
