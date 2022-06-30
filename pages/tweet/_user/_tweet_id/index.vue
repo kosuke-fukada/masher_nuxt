@@ -5,7 +5,10 @@
       :author-id="authorId"
       :author-name="authorName"
     >
-      <div v-if="isAuthenticated && authorId">
+      <div
+        v-if="isAuthenticated && authorId"
+        class="flex flex-col items-center justify-center"
+      >
         <FavButton
           :fav-count="likeCount"
           :disabled="loading"
