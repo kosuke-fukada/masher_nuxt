@@ -75,9 +75,9 @@ export default {
   mounted() {
     this.$refs.firstView.classList.add('show')
     if (this.$route.query) {
-      if (this.$route.query.cancelled) {
+      if (this.$route.query.reason === 'cancel') {
         this.$toast.global.signinCancelled()
-      } else if (this.$route.query.error) {
+      } else if (this.$route.query.reason === 'error') {
         this.$toast.global.serverError()
       }
     }
