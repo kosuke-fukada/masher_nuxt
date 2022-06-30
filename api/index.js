@@ -35,6 +35,7 @@ const axios = require('axios').default
 axios.defaults.withCredentials = true
 axios.defaults.httpsAgent = new https.Agent({ rejectUnauthorized: false })
 axios.defaults.baseURL = process.env.BACKEND_API_HOST
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 app.get('/signin/twitter/', async (req, res) => {
   try {
