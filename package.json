@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "HOST=0.0.0.0 PORT=3000 nuxt",
-    "build": "nuxt build",
+    "build": "nuxt build && yarn copy",
+    "copy": "rimraf functions/ssr && mkdirp functions/ssr && cp -R .nuxt/dist functions/ssr/dist",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
