@@ -16,7 +16,26 @@
   "dependencies": {
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0",
-    "nuxt": "^2.15.8"
+    "@fortawesome/free-brands-svg-icons": "^6.0.0",
+    "@fortawesome/free-solid-svg-icons": "^6.0.0",
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/firebase": "^8.2.2",
+    "@nuxtjs/fontawesome": "^1.1.2",
+    "@nuxtjs/toast": "^3.3.1",
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "core-js": "^3.19.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "firebase": "^9.8.3",
+    "log4js": "^6.4.6",
+    "nuxt": "^2.15.8",
+    "vue": "^2.6.14",
+    "vue-server-renderer": "^2.6.14",
+    "vue-spinkit": "^2.0.0",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
