@@ -59,7 +59,12 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/fontawesome',
+    [
+      '@nuxtjs/fontawesome',
+      {
+        autoAddCss: false
+      }
+    ],
     [
       '@nuxtjs/dotenv',
       {
