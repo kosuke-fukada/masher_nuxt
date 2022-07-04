@@ -11,6 +11,7 @@ export default {
   components: {
     Loading
   },
+  layout: 'empty',
   middleware: 'isAuthenticated',
   head() {
     return {
