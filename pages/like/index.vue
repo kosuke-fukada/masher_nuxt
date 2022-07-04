@@ -96,7 +96,7 @@ export default {
       params.headers = req.headers
     }
     try {
-      const response = await $axios.$get('/api/likes/', params)
+      const response = await $axios.$get('/api/likes', params)
       store.commit('likeList/setLikeList', response.like_list)
       return {
         total: response.total
@@ -177,7 +177,7 @@ export default {
     async fetchLikeList() {
       try {
         this.loading = true
-        const response = await this.$axios.$get('/api/likes/', {
+        const response = await this.$axios.$get('/api/likes', {
           params: {
             page: this.currentPage,
             user_id: this.userId,

@@ -6,7 +6,7 @@
 
 <script>
 import Loading from '~/components/atoms/Loading'
-import ForbiddenError from '~/errors/ForbiddenError'
+import BadRequestError from '~/errors/BadRequestError'
 export default {
   name: 'Callback',
   components: {
@@ -25,8 +25,8 @@ export default {
       params: query
     }
     try {
-      await this.$axios.$get('/api/signin/twitter/callback/', params)
-      const userInfo = await this.$axios.$get('/api/user/')
+      await this.$axios.$get('/api/signin/twitter/callback', params)
+      const userInfo = await this.$axios.$get('/api/user')
       if (userInfo.user_name) {
         await this.$store.dispatch('user/setUserInfo', userInfo)
       } else {
@@ -34,7 +34,7 @@ export default {
       }
       this.$router.replace('/main')
     } catch (e) {
-      if (e instanceof ForbiddenError) {
+      if (e instanceof BadRequestError) {
         this.$router.replace({
           path: '/',
           query: {

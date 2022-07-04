@@ -83,7 +83,7 @@ export default {
           user_name: route.params.user
         }
         try {
-          const authorInfo = await $axios.$get('/api/user/twitter/', {
+          const authorInfo = await $axios.$get('/api/user/twitter', {
             params
           })
           tweet.author_id = authorInfo.data.id
@@ -106,7 +106,7 @@ export default {
       tweet_id: tweetId,
       author_id: authorId
     }
-    const like = await $axios.$get('/api/like_count/', {
+    const like = await $axios.$get('/api/like_count', {
       params
     })
     await store.dispatch('like/setLike', like)
