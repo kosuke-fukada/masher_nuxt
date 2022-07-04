@@ -1,7 +1,7 @@
 <template>
   <div class="select-none">
     <div
-      class="fixed top-0 left-0 w-full h-16 bg-base flex justify-between items-center z-40"
+      class="fixed top-0 left-0 w-screen h-16 bg-base flex justify-between items-center z-40"
     >
       <img
         src="/masher_logo_white.png"
@@ -25,7 +25,7 @@
     <transition name="sidemenu-backdrop">
       <div
         v-show="headerMenuDisplay"
-        class="fixed w-full h-screen bg-backdrop z-50"
+        class="fixed w-screen h-screen bg-backdrop z-50"
         @click.self="toggleHeaderMenu"
       />
     </transition>

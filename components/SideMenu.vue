@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen sidemenu absolute right-0 bg-sidemenu backdrop-blur-md z-50">
+  <div class="h-screen sidemenu fixed right-0 bg-sidemenu backdrop-blur-md z-50">
     <div class="flex items-center justify-start w-auto h-16 border-b-2 bg-base border-gray-400">
       <Icon
         :img="avatar"
@@ -88,6 +88,6 @@ export default {
 
 <style scoped>
 .sidemenu {
-  width: min(50vw, 300px);
+  width: min(14rem, 300px);
 }
 </style>
