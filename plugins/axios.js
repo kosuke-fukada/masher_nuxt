@@ -1,10 +1,14 @@
+import https from 'https'
 import BadRequestError from '~/errors/BadRequestError'
 import ForbiddenError from '~/errors/ForbiddenError'
 import InternalServerError from '~/errors/InternalServerError'
 import NotFoundError from '~/errors/NotFoundError'
 import ValidationError from '~/errors/ValidationError'
 
-export default ({ $axios, error }) => {
+export default ({ $axios }) => {
+  $axios.onRequest(config => {
+    config.httpsAgent = new https.Agent({ rejectUnauthorized: false })
+  })
   $axios.onError(e => {
     if (e.response.status === 404) {
       throw new NotFoundError(e.response.data.message)

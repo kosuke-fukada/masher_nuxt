@@ -1,6 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 import * as FontAwesome from './build/fontawesome'
+const envPath = `./.env.${process.env.NODE_ENV || 'local'}`
+require('dotenv').config({
+  path: envPath
+})
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -55,7 +59,18 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/fontawesome'
+    [
+      '@nuxtjs/fontawesome',
+      {
+        autoAddCss: false
+      }
+    ],
+    [
+      '@nuxtjs/dotenv',
+      {
+        filename: `.env.${process.env.NODE_ENV}`
+      }
+    ]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -80,14 +95,36 @@ export default {
           functions: true
         }
       }
+    ],
+    [
+      '@nuxtjs/dotenv',
+      {
+        filename: `.env.${process.env.NODE_ENV}`
+      }
     ]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://local.masher.app:3000',
-    credentials: true
+    baseURL: process.env.SITE_URL,
+    credentials: true,
+    headers: {
+      common: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    },
+    proxy: true
+  },
+
+  proxy: {
+    '/api/': {
+      target: process.env.BACKEND_API_HOST,
+      pathRewrite: {
+        '^/api/': ''
+      },
+      secure: process.env.NODE_ENV === 'production'
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -118,7 +155,8 @@ export default {
     FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
     FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
-    FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID
+    FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
+    NODE_ENV: process.env.NODE_ENV
   },
 
   server: {
@@ -140,10 +178,6 @@ export default {
       })
     }
   },
-
-  serverMiddleware: [
-    '~/api/'
-  ],
 
   loadingIndicator: {
     name: 'three-bounce',

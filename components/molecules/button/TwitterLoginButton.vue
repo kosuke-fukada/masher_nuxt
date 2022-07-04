@@ -7,7 +7,7 @@
       <span>
         <font-awesome-icon
           :icon="['fab', 'twitter']"
-          class="mr-2 text-white"
+          class="mr-2 text-white text-md"
         />
         Twitterでログイン
       </span>

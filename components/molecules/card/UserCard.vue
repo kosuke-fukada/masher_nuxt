@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$axios.$get('/api/signout/')
+      await this.$axios.$get('/api/signout')
       await this.$store.dispatch('user/clearUser')
       location.href = '/'
     }
