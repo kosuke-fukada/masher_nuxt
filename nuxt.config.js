@@ -24,7 +24,8 @@ export default {
       { hid: 'og:title', property: 'og:title', content: 'Masher - Twitter無限いいねボタン' },
       { hid: 'og:description', property: 'og:description', content: 'MasherはTwitterのいいねボタンを無限に押せるサービスです。お持ちのTwitterアカウントでログインするだけで簡単に始められます。気に入ったツイートに思う存分いいねしよう！' },
       { hid: 'og:image', property: 'og:image', content: process.env.SITE_URL + '/masher_ogp.png' },
-      { name: 'twitter:card', content: 'summary_large_image' }
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'theme-color', content: '#04B4AE' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
