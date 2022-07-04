@@ -19,7 +19,7 @@ export default {
   },
   async mounted() {
     try {
-      const url = await this.$axios.$get('/api/signin/twitter')
+      const url = await this.$axios.$get('/signin/twitter')
       location.href = url
     } catch (e) {
       this.$router.push({

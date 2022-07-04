@@ -123,7 +123,7 @@ export default {
     }
   },
   async mounted() {
-    const userInfo = await this.$axios.$get('/api/user')
+    const userInfo = await this.$axios.$get('/user')
     if (userInfo.user_name) {
       await this.$store.dispatch('user/setUserInfo', userInfo)
     } else {

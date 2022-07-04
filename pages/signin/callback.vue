@@ -25,8 +25,8 @@ export default {
       params: query
     }
     try {
-      await this.$axios.$get('/api/signin/twitter/callback', params)
-      const userInfo = await this.$axios.$get('/api/user')
+      await this.$axios.$get('/signin/twitter/callback', params)
+      const userInfo = await this.$axios.$get('/user')
       if (userInfo.user_name) {
         await this.$store.dispatch('user/setUserInfo', userInfo)
       } else {
