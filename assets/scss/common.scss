@@ -1,3 +1,7 @@
+html {
+  touch-action: manipulation;
+}
+
 .toasted-container {
   min-width: unset !important;
 
