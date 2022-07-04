@@ -83,7 +83,7 @@ export default {
           user_name: route.params.user
         }
         try {
-          const authorInfo = await $axios.$get('/api/user/twitter', {
+          const authorInfo = await $axios.$get('/user/twitter', {
             params
           })
           tweet.author_id = authorInfo.data.id
@@ -106,7 +106,7 @@ export default {
       tweet_id: tweetId,
       author_id: authorId
     }
-    const like = await $axios.$get('/api/like_count', {
+    const like = await $axios.$get('/like_count', {
       params
     })
     await store.dispatch('like/setLike', like)
@@ -184,7 +184,7 @@ export default {
           author_id: this.authorId,
           like_count: this.likeCount
         }
-        await this.$axios.$put('/api/like_count', params)
+        await this.$axios.$put('/like_count', params)
         this.$toast.global.addLikeSuccess()
       } catch (e) {
         this.$toast.global.addLikeError()
@@ -201,7 +201,7 @@ export default {
           author_id: this.authorId,
           like_count: this.likeCount
         }
-        const createdLike = await this.$axios.$post('/api/like_count', params)
+        const createdLike = await this.$axios.$post('/like_count', params)
         await this.$store.dispatch('like/setLike', createdLike)
         this.$toast.global.addLikeSuccess()
       } catch (e) {

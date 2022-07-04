@@ -99,7 +99,7 @@ export default {
           email: this.email,
           body: this.body
         }
-        await this.$axios.$post('/api/inquiry', params)
+        await this.$axios.$post('/inquiry', params)
         this.$store.dispatch('inquiry/inquiryCompleted')
         this.$router.push('/inquiry/thanks')
       } catch (e) {

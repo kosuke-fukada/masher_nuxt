@@ -74,7 +74,7 @@ export default {
       author_id: this.authorId,
       author_name: this.authorName
     }
-    await this.$axios.$get('/api/tweet', {
+    await this.$axios.$get('/tweet', {
       params
     }).then(response => {
       this.tweet = response
