@@ -5,7 +5,7 @@
   >
     <font-awesome-icon
       icon="share-nodes"
-      class="mr-2 text-white"
+      class="mr-2 text-white text-md"
     />
     Share
   </Button>

@@ -197,7 +197,7 @@
                 Google Analyticsの利用規約
                 <font-awesome-icon
                   icon="up-right-from-square"
-                  class="ml-1"
+                  class="ml-1 text-md"
                 />
               </a>
             </li>
@@ -209,7 +209,7 @@
                 Googleのプライバシーポリシー
                 <font-awesome-icon
                   icon="up-right-from-square"
-                  class="ml-1"
+                  class="ml-1 text-md"
                 />
               </a>
             </li>

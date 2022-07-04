@@ -7,7 +7,7 @@
       <span class="mr-1">
         <font-awesome-icon
           icon="heart"
-          class="mr-1 text-red-600"
+          class="mr-1 text-red-600 text-md"
         />
         {{ favCount }}
       </span>
