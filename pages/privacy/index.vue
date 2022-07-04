@@ -245,6 +245,11 @@ export default {
   name: 'Privacy',
   components: {
     Heading
+  },
+  head() {
+    return {
+      title: 'プライバシーポリシー'
+    }
   }
 }
 </script>
