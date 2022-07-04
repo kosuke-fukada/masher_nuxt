@@ -13,7 +13,10 @@
         v-else-if="!error"
         class="flex flex-col items-center"
       >
-        <div v-html="tweet.html" />
+        <div
+          class="tweet-wrapper"
+          v-html="tweet.html"
+        />
         <slot />
       </div>
       <div
@@ -95,6 +98,10 @@ export default {
 </script>
 
 <style>
+.tweet-wrapper {
+  width: min(80vw, 542px) !important;
+}
+
 .twitter-tweet > iframe {
   width: min(80vw, 542px) !important;
 }
