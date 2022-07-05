@@ -5,7 +5,7 @@ export const actions = {
       params.headers = req.headers
     }
     try {
-      const userInfo = await $axios.$get('/user', params)
+      const userInfo = await $axios.$get('/signin/remember_token', params)
       if (userInfo.user_name) {
         await dispatch('user/setUserInfo', userInfo)
       } else {
