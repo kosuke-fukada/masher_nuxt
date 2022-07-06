@@ -56,7 +56,7 @@ export default {
     Heading
   },
   middleware: 'authenticatedUserOnly',
-  async asyncData({ $axios, store, req, app }) {
+  async asyncData({ $axios, store, req, app, redirect }) {
     const params = {}
     if (process.server) {
       params.headers = req.headers
@@ -66,7 +66,13 @@ export default {
       store.commit('likeTweetList/setTweetList', response.tweetList)
       store.commit('likeTweetList/setNextToken', response.nextToken)
     } catch (e) {
-      app.$toast.global.serverError()
+      if (process.server) {
+        await $axios.$get('/signout')
+        await store.dispatch('user/clearUser')
+        redirect('/')
+      } else {
+        app.$toast.global.serverError()
+      }
     }
   },
   data() {
@@ -95,6 +101,11 @@ export default {
       set(nextToken) {
         this.$store.commit('likeTweetList/setNextToken', nextToken)
       }
+    }
+  },
+  mounted() {
+    if (!this.$store.getters['user/isAuthenticated']) {
+      location.href = '/'
     }
   },
   methods: {

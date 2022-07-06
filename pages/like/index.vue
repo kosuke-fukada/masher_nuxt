@@ -83,7 +83,7 @@ export default {
     Loading
   },
   middleware: 'authenticatedUserOnly',
-  async asyncData({ $axios, store, req, app }) {
+  async asyncData({ $axios, store, req, app, redirect }) {
     const params = {
       params: {
         page: 1,
@@ -102,7 +102,13 @@ export default {
         total: response.total
       }
     } catch (e) {
-      app.$toast.global.serverError()
+      if (process.server) {
+        await $axios.$get('/signout')
+        await store.dispatch('user/clearUser')
+        redirect('/')
+      } else {
+        app.$toast.global.serverError()
+      }
     }
   },
   data() {
