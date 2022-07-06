@@ -71,7 +71,7 @@ export default {
   validate({ params }) {
     return /^[A-Za-z0-9_]{1,15}$/.test(params.user) && /^\d+$/.test(Number(params.tweet_id))
   },
-  async asyncData({ store, route, $axios, app }) {
+  async asyncData({ store, route, $axios, app, redirect }) {
     if (!store.getters['tweet/isSetTweet']) {
       const tweet = {
         tweet_id: route.params.tweet_id,
@@ -88,7 +88,13 @@ export default {
           })
           tweet.author_id = authorInfo.data.id
         } catch (e) {
-          app.$toast.global.serverError()
+          if (process.server) {
+            await $axios.$get('/signout')
+            await store.dispatch('user/clearUser')
+            redirect('/')
+          } else {
+            app.$toast.global.serverError()
+          }
         }
       }
       await store.dispatch('tweet/setTweet', tweet)

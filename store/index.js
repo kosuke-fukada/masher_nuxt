@@ -1,8 +1,7 @@
 export const actions = {
   async nuxtServerInit({ dispatch }, { req, $axios }) {
-    const params = {}
-    if (process.server) {
-      params.headers = req.headers
+    const params = {
+      headers: req.headers
     }
     try {
       const userInfo = await $axios.$get('/signin/remember_token', params)
