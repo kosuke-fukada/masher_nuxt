@@ -36,6 +36,11 @@ export default {
         async: true,
         defer: true,
         src: 'https://platform.twitter.com/widgets.js'
+      },
+      {
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8006332248242570',
+        async: true,
+        crossorigin: 'anonymous'
       }
     ]
   },
