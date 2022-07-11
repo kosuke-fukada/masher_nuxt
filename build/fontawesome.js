@@ -4,6 +4,8 @@ const solid = [
   'faChevronLeft',
   'faChevronUp',
   'faHeart',
+  'faReply',
+  'faRetweet',
   'faShareNodes',
   'faUpRightFromSquare'
 ]
