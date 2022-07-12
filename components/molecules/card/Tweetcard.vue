@@ -34,6 +34,7 @@
           </div>
           <div class="px-4 my-2">
             <p
+              class="whitespace-pre-wrap"
               v-html="autoLinkTweet"
             />
           </div>
@@ -84,13 +85,27 @@
                 v-if="media.type === 'photo'"
                 :key="media.media_key"
                 :src="media.url"
+                class="media-body"
               >
               <video
                 v-else-if="media.type === 'video'"
                 :key="media.media_key"
                 :src="media.variants[0].url"
+                :poster="media.preview_image_url"
                 muted
                 controls
+                class="media-body"
+              />
+              <video
+                v-else-if="media.type === 'animated_gif'"
+                :key="media.media_key"
+                :src="media.variants[0].url"
+                :poster="media.preview_image_url"
+                autoplay
+                loop
+                muted
+                controls
+                class="media-body"
               />
             </template>
           </div>
@@ -205,8 +220,8 @@ export default {
   width: min(80vw, 542px) !important;
 }
 
-.twitter-tweet > iframe {
-  width: min(80vw, 542px) !important;
+.media-body {
+  width: calc(min(80vw, 542px) - 2rem) !important;
 }
 
 .tweet-card > div {
