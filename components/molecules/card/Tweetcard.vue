@@ -101,7 +101,6 @@
                 :key="media.media_key"
                 :src="media.variants[0].url"
                 :poster="media.preview_image_url"
-                autoplay
                 loop
                 muted
                 controls
